@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>All My Changes</h1>
+<form method="POST" action="">
+ {{ form }}
+ {% csrf_token %}
+ <input type="submit"/>
+</form>
+
+{% if job_id %}
+ job id is {{ job_id }}
+{% endif %}
+{% endblock %}

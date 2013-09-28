@@ -1,3 +1,4 @@
 -e git+git://github.com/svetlyak40wt/pip-tools.git@49e94cd8531db0cfed681ce2524e6e50d07dd1d9#egg=pip-tools
 Django==1.5.4
 South==0.8.2
+django-vanilla-views==1.0.1
