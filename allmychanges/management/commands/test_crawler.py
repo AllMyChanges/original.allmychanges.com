@@ -71,7 +71,10 @@ class Command(BaseCommand):
                         changelogs_parsed += 1
                         changelogs_versions += num_versions
                         changelogs_items += num_items
-                    print changelog_filename
+
+                else:
+                    # changelog not found in repository
+                    print url
 
             except RuntimeError:
                 pass
