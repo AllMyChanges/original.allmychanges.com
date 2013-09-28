@@ -87,7 +87,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'Bad Idea'
+# SECRET_KEY = 'Bad Idea'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -155,3 +155,5 @@ LOGGING = {
         },
     }
 }
+
+from secure_settings import *

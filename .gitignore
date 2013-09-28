@@ -35,3 +35,4 @@ nosetests.xml
 .pydevproject
 *.tar.gz
 /env
+/secure_settings.py
