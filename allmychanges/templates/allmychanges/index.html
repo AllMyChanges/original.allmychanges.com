@@ -1,0 +1,52 @@
+{% extends "allmychanges/base.html" %}
+
+
+{% block extra_head %}
+<script type="text/javascript">
+    function MainCtrl($scope) {
+        $scope.repo_url = null;
+
+        $scope.examples = [
+            {
+                'title': 'Flask',
+                'url': 'https://github.com/mitsuhiko/flask/'
+            },
+            {
+                'title': 'Django Rest Framework',
+                'url': 'https://github.com/tomchristie/django-rest-framework/'
+            },
+            {
+                'title': 'Gevent',
+                'url': 'https://github.com/surfly/gevent/'
+            }
+        ]
+
+        $scope.set_repo_url_and_submit = function(repo_url) {
+            $scope.repo_url = repo_url;
+        }
+    }
+</script>
+{% endblock extra_head %}
+
+
+{% block content %}
+    {% verbatim %}
+    <div class="container" ng-controller="MainCtrl">
+        <div class="headline">
+            <h6 style="text-align: center">All my changes</h6>
+            <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="repo_url">
+            <div style="text-align: right">
+                Examples:
+                <small ng-repeat="example in examples">
+                    <a href="javascript: false"
+                       style="border-bottom: 1px dotted"
+                       ng-click="set_repo_url_and_submit(example.url)">
+                        {{ example.title }}
+                    </a>
+                    <span ng-hide="$last">, </span>
+                </small>
+            </div>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock content %}
