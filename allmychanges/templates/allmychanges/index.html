@@ -5,17 +5,17 @@
 <script type="text/javascript">
     function MainCtrl($scope) {
         $scope.current_repo = {
-            changelog: [
+            versions: [
                 {
                     'version': '0.1.3',
                     'date': '2013-09-15',
                     'items': [
                         {
-                            'title': 'Support for fallback languages. Allows fine grained configuration through project settings and TranslationOptions on model basis. (thanks to Jacek Tomaszewski, resolves issue #104)',
+                            'text': 'Support for fallback languages. Allows fine grained configuration through project settings and TranslationOptions on model basis. (thanks to Jacek Tomaszewski, resolves issue #104)',
                             'type': 'fix'
                         },
                         {
-                            'title': 'Ядро 2',
+                            'text': 'Ядро 2',
                             'type': 'new'
                         }
                     ]
@@ -25,15 +25,15 @@
                     'date': '2013-01-15',
                     'items': [
                         {
-                            'title': 'Ядро 1',
+                            'text': 'Ядро 1',
                             'type': 'fix'
                         },
                         {
-                            'title': 'Ядро 2',
+                            'text': 'Ядро 2',
                             'type': 'new'
                         },
                         {
-                            'title': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
+                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
                             'type': 'new'
                         }
                     ]
@@ -42,15 +42,15 @@
                     'version': '0.0.1',
                     'items': [
                         {
-                            'title': 'Ядро 1',
+                            'text': 'Ядро 1',
                             'type': 'fix'
                         },
                         {
-                            'title': 'Ядро 2',
+                            'text': 'Ядро 2',
                             'type': 'new'
                         },
                         {
-                            'title': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
+                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
                             'type': 'new'
                         }
                     ]
@@ -116,7 +116,7 @@
         <div>
             <h6 style="margin-bottom: 1.5em;"><a href="{{ current_repo.url }}">{{ current_repo.title }}</a></h6>
             <div>
-                <div ng-repeat="change in current_repo.changelog" class="change_container">
+                <div ng-repeat="version in current_repo.versions" class="change_container">
                     <div style="margin-bottom: 1em">
                         <span style="font-weight: bold; font-size: 1.3em; ">Version {{ change.version }}</span>
                         <span ng-show="change.date"
@@ -139,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
-                                    {{ item.title }}
+                                    {{ item.text }}
                                 </div>
                             </div>
                         </li>
