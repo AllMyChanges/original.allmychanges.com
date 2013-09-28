@@ -51,7 +51,7 @@ def get_package_metadata(path, field_name):
 def transform_url(url):
     """Normalizes url to 'git@github.com:{username}/{repo}' and also
     returns username and repository's name."""
-    username, repo = re.search(r'[/:](?P<username>[A-Za-z0-9-]+)/(?P<repo>.*)', url).groups()
+    username, repo = re.search(r'[/:](?P<username>[A-Za-z0-9-]+)/(?P<repo>[^/]*)', url).groups()
     if url.startswith('git@'):
         return url, username, repo
     return 'git@github.com:{username}/{repo}'.format(**locals()), username, repo
