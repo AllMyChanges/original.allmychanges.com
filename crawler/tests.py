@@ -134,6 +134,8 @@ def test_get_markup_type():
     eq_('markdown', get_markup_type('README.md'))
     eq_('markdown', get_markup_type('readme.mD'))
     eq_('markdown', get_markup_type('readme.txt.md'))
+    eq_('markdown', get_markup_type('readme.markdown'))
+    eq_('markdown', get_markup_type('readme.MARKDOWN'))
 
     eq_('rest', get_markup_type('README.RST'))
     eq_('rest', get_markup_type('README.rst'))
@@ -152,3 +154,6 @@ def test_get_commit_type():
     eq_('fix', get_commit_type('fix 100 bags'))
     eq_('fix', get_commit_type('100 bags were fixed'))
     eq_('fix', get_commit_type('change some bugfix'))
+    eq_('fix', get_commit_type('some fixes'))
+    eq_('fix', get_commit_type('[Fix] Resolved'))
+    eq_('new', get_commit_type('change something'))

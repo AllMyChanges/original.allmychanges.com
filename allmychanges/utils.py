@@ -113,4 +113,4 @@ def get_commit_type(commit_message):
         return 'fix'
     elif 'bugfix' in commit_message:
         return 'fix'
-    return
+    return 'new'
