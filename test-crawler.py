@@ -57,7 +57,9 @@ def test_crawler_on(url):
         if os.path.exists(path):
             with cd(path):
                 changelog_filename = search_changelog()
-                return changelog_filename
+                if changelog_filename:
+                    return os.path.normpath(
+                        os.path.join(os.getcwd(), changelog_filename))
     finally:
         pass
 

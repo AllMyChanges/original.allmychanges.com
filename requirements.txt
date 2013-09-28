@@ -7,6 +7,6 @@ django-extensions==1.2.2
 djangorestframework==2.3.8
 envoy==0.0.2
 graphitesend==0.1.1
-nose==1.3.0
+nose==1.2.1
 requests==2.0.0
 six==1.4.1
