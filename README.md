@@ -12,6 +12,8 @@ How to setup
     $ source env/bin/activate
     $ echo 'SECRET_KEY = "some really secret string"' > secure_settings.py
     $ chmod +x manage.py
+    $ sudo mkdir -p /var/log/allmychanges
+    $ sudo chmod 777 /var/log/allmychanges
     $ ./manage.py syncdb --migrate
     $ ./manage.py runserver 0.0.0.0:8000
     $ # and in other console

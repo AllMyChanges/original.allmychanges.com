@@ -100,6 +100,7 @@ class Repo(models.Model):
             self.processing_progress = 100
             self.processing_date_finished = now()
             self.save()
+            raise
 
     def _update_from_git_log(self, path):
         changes = aggregate_git_log(path)
@@ -130,6 +131,7 @@ class Repo(models.Model):
             for change in changes:
                 version = self.versions.create(name=change['version'])
                 for section in change['sections']:
+
                     item = version.items.create(text=section['notes'])
                     for section_item in section['items']:
                         item.changes.create(type='new', text=section_item)
