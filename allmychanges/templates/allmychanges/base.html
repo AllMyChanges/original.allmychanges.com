@@ -26,7 +26,24 @@
         }
 
         .headline {
-            padding: 73px 0 110px;
+            padding: 73px 0 10px 0;
+        }
+
+        .change_container {
+            margin-bottom: 2em;
+            border-bottom: 1px solid #ECF0F1;
+            padding-bottom: 1em;
+        }
+        .change_container:last-child{
+            border-bottom: none;
+        }
+
+        .label{
+            padding: 0.4em 0.6em 0.3em;
+        }
+
+        .note {
+            color: #c0c1c2;
         }
     </style>
 
@@ -35,6 +52,14 @@
 
 <body>
     {% block content %}{% endblock content %}
+    <footer class="footer">
+        <div class="container" style="padding-top: 0.5em; padding-bottom: 0.5em; text-align: center;">
+            <small>
+                &copy; <a href="http://djangodash.com/teams/c4/changers/">Changers team</a>,
+                specially for <a href="http://djangodash.com/">DjangoDash 2013</a>
+            </small>
+        </div>
+    </footer>
 
     <!-- Load JS here for greater good =============================-->
     <script src="{% static 'allmychanges/flat_ui/js/jquery-1.8.3.min.js' %}"></script>

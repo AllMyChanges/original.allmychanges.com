@@ -4,7 +4,59 @@
 {% block extra_head %}
 <script type="text/javascript">
     function MainCtrl($scope) {
-        $scope.repo_url = null;
+        $scope.current_repo = {
+            versions: [
+                {
+                    'version': '0.1.3',
+                    'date': '2013-09-15',
+                    'items': [
+                        {
+                            'text': 'Support for fallback languages. Allows fine grained configuration through project settings and TranslationOptions on model basis. (thanks to Jacek Tomaszewski, resolves issue #104)',
+                            'type': 'fix'
+                        },
+                        {
+                            'text': 'Ядро 2',
+                            'type': 'new'
+                        }
+                    ]
+                },
+                {
+                    'version': '0.1.0',
+                    'date': '2013-01-15',
+                    'items': [
+                        {
+                            'text': 'Ядро 1',
+                            'type': 'fix'
+                        },
+                        {
+                            'text': 'Ядро 2',
+                            'type': 'new'
+                        },
+                        {
+                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
+                            'type': 'new'
+                        }
+                    ]
+                },
+                {
+                    'version': '0.0.1',
+                    'items': [
+                        {
+                            'text': 'Ядро 1',
+                            'type': 'fix'
+                        },
+                        {
+                            'text': 'Ядро 2',
+                            'type': 'new'
+                        },
+                        {
+                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
+                            'type': 'new'
+                        }
+                    ]
+                }
+            ]
+        };
 
         $scope.examples = [
             {
@@ -21,9 +73,12 @@
             }
         ]
 
-        $scope.set_repo_url_and_submit = function(repo_url) {
-            $scope.repo_url = repo_url;
-        }
+        $scope.set_repo_and_submit = function(title, url) {
+            $scope.current_repo.title = title;
+            $scope.current_repo.url = url;
+        };
+
+        $scope.set_repo_and_submit($scope.examples[0].title, $scope.examples[0].url);  // for testing
     }
 </script>
 {% endblock extra_head %}
@@ -33,18 +88,63 @@
     {% verbatim %}
     <div class="container" ng-controller="MainCtrl">
         <div class="headline">
-            <h6 style="text-align: center">All my changes</h6>
-            <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="repo_url">
+            <form action="">
+                <div class="input-group">
+                    <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
+                    <span class="input-group-btn">
+                        <input type="submit"
+                               value="Show changelog"
+                               class="btn btn-primary input-group-addon"
+                               style="width: 9em; border-radius: 0px 5px 5px 0px;"/>
+                    </span>
+                </div>
+            </form>
+
             <div style="text-align: right">
                 Examples:
                 <small ng-repeat="example in examples">
                     <a href="javascript: false"
                        style="border-bottom: 1px dotted"
-                       ng-click="set_repo_url_and_submit(example.url)">
+                       ng-click="set_repo_and_submit(example.title, example.url)">
                         {{ example.title }}
                     </a>
                     <span ng-hide="$last">, </span>
                 </small>
+            </div>
+        </div>
+
+        <div>
+            <h6 style="margin-bottom: 1.5em;"><a href="{{ current_repo.url }}">{{ current_repo.title }}</a></h6>
+            <div>
+                <div ng-repeat="version in current_repo.versions" class="change_container">
+                    <div style="margin-bottom: 1em">
+                        <span style="font-weight: bold; font-size: 1.3em; ">Version {{ change.version }}</span>
+                        <span ng-show="change.date"
+                              class="note"
+                              style="font-size: 13px;">
+                            &nbsp;{{ change.date }}
+                        </span>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="item in change.items" style="padding: 0.5em 0;">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="label"
+                                          ng-class="{
+                                              'label-info': item.type == 'new',
+                                              'label-success': item.type == 'fix'
+                                          }"
+                                          style="width: 100%; display: block">
+                                        {{ item.type | uppercase }}
+                                    </div>
+                                </div>
+                                <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
+                                    {{ item.text }}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
