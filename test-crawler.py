@@ -57,8 +57,7 @@ def test_crawler_on(url):
         if os.path.exists(path):
             with cd(path):
                 changelog_filename = search_changelog()
-                if changelog_filename:
-                    return True
+                return changelog_filename
     finally:
         pass
 
@@ -78,9 +77,10 @@ def test():
         changelogs_found = 0
         for name, url in reps:
             try:
-                changelog_found = test_crawler_on(url)
-                if changelog_found:
+                changelog_filename = test_crawler_on(url)
+                if changelog_filename:
                     changelogs_found += 1
+                    print changelog_filename
 
             except RuntimeError:
                 pass
