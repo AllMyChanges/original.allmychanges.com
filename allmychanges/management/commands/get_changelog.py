@@ -5,7 +5,7 @@ from django.conf import settings
 
 from crawler import search_changelog, _parse_changelog_text
 from allmychanges.models import Repo
-from allmychanges.utils import cd
+from allmychanges.utils import cd, get_package_metadata
 
         
 class Command(BaseCommand):
@@ -26,7 +26,9 @@ class Command(BaseCommand):
                     changes = _parse_changelog_text(f.read())
 
                     if changes:
-                        repo, created = Repo.objects.get_or_create(url=fullfilename, title=fullfilename)
+                        repo, created = Repo.objects.get_or_create(
+                            url=fullfilename,
+                            title=get_package_metadata('.', 'Name'))
                         repo.versions.all().delete()
                         
                         for change in changes:

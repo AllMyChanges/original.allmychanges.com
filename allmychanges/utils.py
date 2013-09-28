@@ -1,5 +1,7 @@
 import os
+import re
 import string
+import envoy
 
 from contextlib import contextmanager
 
@@ -23,11 +25,23 @@ def cd(path):
     """
     old_path = os.getcwd()
     os.chdir(path)
-    yield
-    os.chdir(old_path)
+    try:
+        yield
+    finally:
+        os.chdir(old_path)
 
 
 
-def get_package_name(path):
+def get_package_metadata(path, field_name):
+    """Generates PKG-INFO and extracts given field.
+    Example:
+    get_package_metadata('/path/to/repo', 'Name')
+    """
     with cd(path):
-        evoy
+        response = envoy.run('python setup.py egg_info')
+        for line in response.std_out.split('\n'):
+            if 'PKG-INFO' in line:
+                with open(line.split(None, 1)[1]) as f:
+                    match = re.search(r'{0}: (.*)'.format(field_name), f.read())
+                    if match is not None:
+                        return match.group(1)
