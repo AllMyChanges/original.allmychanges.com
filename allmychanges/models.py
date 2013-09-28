@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
-
 import os
-import times
+import datetime
 
 from django.db import models
+from django.utils.timezone import now
+
 from crawler import search_changelog, _parse_changelog_text
 from allmychanges.utils import cd, get_package_metadata, download_repo
 from allmychanges.tasks import update_repo
+
+
+MARKUP_CHOICES = (
+    ('markdown', 'markdown'),
+    ('rest', 'rest'),
+)
 
 
 class Repo(models.Model):
@@ -18,6 +25,7 @@ class Repo(models.Model):
 
     url = models.URLField(unique=True)
     title = models.CharField(max_length=255)
+    changelog_markup = models.CharField(max_length=20, choices=MARKUP_CHOICES, blank=True, null=True)
 
     # processing fields
     processing_state = models.CharField(max_length=20, choices=PROCESSING_STATE_CHOICES, null=True)
@@ -43,8 +51,19 @@ class Repo(models.Model):
             return False
 
     def is_need_processing(self):
-        # todo: me
-        return True
+        if not self.processing_date_started:
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(30):
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(5) and self.processing_state == 'finished':
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(1) and self.processing_state == 'error':
+            return True
+        else:
+            return False
+
+    def is_processing_started_more_than_minutes_ago(self, minutes):
+        return now() > self.processing_date_started + datetime.timedelta(minutes=minutes)
 
     def start_changelog_processing(self):
         update_repo.delay(self.id)
@@ -54,7 +73,7 @@ class Repo(models.Model):
         self.processing_state = 'in_progress'
         self.processing_status_message = 'Downloading code'
         self.processing_progress = 50
-        self.processing_date_started = times.now()
+        self.processing_date_started = now()
         self.save()
 
         try:
@@ -94,15 +113,14 @@ class Repo(models.Model):
                                 self.processing_state = 'finished'
                                 self.processing_status_message = 'Done'
                                 self.processing_progress = 100
-                                self.processing_date_finished = times.now()
+                                self.processing_date_finished = now()
                                 self.save()
         except Exception as e:
             self.processing_state = 'error'
             self.processing_status_message = str(e)
             self.processing_progress = 100
-            self.processing_date_finished = times.now()
+            self.processing_date_finished = now()
             self.save()
-
 
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')

@@ -32,7 +32,6 @@ def cd(path):
         os.chdir(old_path)
 
 
-
 def get_package_metadata(path, field_name):
     """Generates PKG-INFO and extracts given field.
     Example:
@@ -55,7 +54,7 @@ def transform_url(url):
     if url.startswith('git@'):
         return url, username, repo
     return 'git@github.com:{username}/{repo}'.format(**locals()), username, repo
-    
+
 
 
 def download_repo(url, pull_if_exists=True):
@@ -79,6 +78,17 @@ def download_repo(url, pull_if_exists=True):
             os.makedirs(path)
             with open(os.path.join(path, '.failed'), 'w') as f:
                 f.write('')
-            raise RuntimeError('Bad status_code from git clone: {0}'.format(response.status_code))
+            raise RuntimeError('Bad status_code from git clone: {0}. Git\s stderr: {1}'.format(
+                response.status_code, response.std_err)
+            )
 
     return path
+
+
+def get_markup_type(filename):
+    """Return markdown or rest or None"""
+    extension = filename.rsplit('.', 1)[-1].lower()
+    if extension == 'md':
+        return 'markdown'
+    elif extension == 'rst':
+        return 'rest'
