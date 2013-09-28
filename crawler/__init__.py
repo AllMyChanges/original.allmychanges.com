@@ -11,8 +11,8 @@ def list_files():
 
 
 include_predicates = [
-#    lambda x: 'change' in x,
-#    lambda x: 'news' in x,
+    lambda x: 'change' in x,
+    lambda x: 'news' in x,
     lambda x: 'release' in x,
 ]
 
@@ -33,7 +33,7 @@ def _filter_changelog_files(filenames):
 
 def search_changelog():
     """Searches changelog-like files in the current directory."""
-    filesnames = list(list_files())
+    filenames = list(list_files())
     for filename in _filter_changelog_files(filenames):
         return filename
 
