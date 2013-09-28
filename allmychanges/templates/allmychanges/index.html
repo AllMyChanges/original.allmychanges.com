@@ -5,7 +5,7 @@
 <script type="text/javascript">
     angular.module('allMyChangesApp', ['ngCookies']);
 
-    function MainCtrl($scope, $cookies, $http) {
+    function MainCtrl($scope, $cookies, $http, $timeout) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
 
         $scope.current_repo = {};
@@ -13,12 +13,12 @@
 
         $scope.examples = [
             {
-                'title': 'Flask',
-                'url': 'https://github.com/mitsuhiko/flask/'
+                'title': 'Requests',
+                'url': 'https://github.com/kennethreitz/requests'
             },
             {
-                'title': 'Django Rest Framework',
-                'url': 'https://github.com/tomchristie/django-rest-framework/'
+                'title': 'Flask',
+                'url': 'https://github.com/mitsuhiko/flask/'
             },
             {
                 'title': 'Gevent',
@@ -55,7 +55,29 @@
         $scope.start_watching_for_changelog_processing = function(repo_id) {
             $http.get('/v1/repos/' + repo_id + '/').success(function(data){
                 $scope.current_repo = data;
+
+                $scope.show_message(
+                    $scope.current_repo.processing_status_message,
+                    $scope.get_message_type_for_repo($scope.current_repo)
+                );
+                if ($scope.current_repo.processing_state == 'in_progress') {
+                    $timeout(function(){
+                        $scope.start_watching_for_changelog_processing($scope.current_repo.id);
+                    }, 1000);
+                }
             });
+        };
+
+        $scope.get_message_type_for_repo = function(repo) {
+            if (repo.processing_state == 'in_progress') {
+                return 'info';
+            }else if (repo.processing_state == 'finished') {
+                return 'success';
+            }else if (repo.processing_state == 'error') {
+                return 'danger';
+            }else{
+                return null;
+            }
         };
 
         $scope.show_message = function(text, type) {
@@ -64,7 +86,8 @@
             $scope.message.text = text;
         };
 
-        var initial_url = 'http://allmychanges.com/flask-initial/';  // should be created from initial_data.json
+//        var initial_url = 'http://allmychanges.com/flask-initial/';  // should be created from initial_data.json
+        var initial_url = 'https://github.com/kennethreitz/requests';  // should be created from initial_data.json
         $scope.current_repo.url = initial_url;
         $scope.create_changelog_for_url($scope.current_repo.url);
     }
@@ -75,7 +98,9 @@
 {% block content %}
     {% verbatim %}
     <div ng-controller="MainCtrl">
-        <div class="progress-bar">&nbsp;</div>
+        <div class="progress-bar"
+             ng-show="current_repo.processing_state=='in_progress'"
+             style="width: {{ current_repo.processing_progress }}%;">&nbsp;</div>
         <div class="container">
             <div class="headline">
                 <div class="headline-message headline-message-{{ message.type }}">
@@ -99,7 +124,7 @@
                     <small ng-repeat="example in examples">
                         <a href="javascript: false"
                            style="border-bottom: 1px dotted"
-                           ng-click="set_repo_and_submit(example.title, example.url)">
+                           ng-click="set_repo_and_submit(null, example.url)">
                             {{ example.title }}
                         </a>
                         <span ng-hide="$last">, </span>
