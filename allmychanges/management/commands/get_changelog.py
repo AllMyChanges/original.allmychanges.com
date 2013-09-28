@@ -42,7 +42,3 @@ class Command(BaseCommand):
                                 item = version.items.create(text=section['notes'])
                                 for section_item in section['items']:
                                     item.changes.create(type='new', text=section_item)
-                            
-
-                          
-
