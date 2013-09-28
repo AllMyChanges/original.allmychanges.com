@@ -40,6 +40,7 @@
         };
 
         $scope.create_changelog_for_url = function(url) {
+            $scope.message = {};
             $http({
                 method: 'POST',
                 data: {url: url},
@@ -81,7 +82,7 @@
                     {{ message.text }}&nbsp;
                 </div>
 
-                <form action="">
+                <form ng-submit="create_changelog_for_url(current_repo.url)">
                     <div class="input-group">
                         <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
                         <span class="input-group-btn">
