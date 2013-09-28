@@ -92,3 +92,19 @@ def get_markup_type(filename):
         return 'markdown'
     elif extension == 'rst':
         return 'rest'
+
+
+def get_commit_type(commit_message):
+    """Return new or fix or None"""
+    commit_message = commit_message.lower()
+    if commit_message.startswith('add'):
+        return 'new'
+    elif commit_message.startswith('new '):
+        return 'new'
+    elif commit_message.startswith('fix'):
+        return 'fix'
+    elif ' fixed' in commit_message:
+        return 'fix'
+    elif 'bugfix' in commit_message:
+        return 'fix'
+    return
