@@ -79,6 +79,8 @@ def download_repo(url, pull_if_exists=True):
             os.makedirs(path)
             with open(os.path.join(path, '.failed'), 'w') as f:
                 f.write('')
-            raise RuntimeError('Bad status_code from git clone: {0}'.format(response.status_code))
+            raise RuntimeError('Bad status_code from git clone: {0}. Git\s stderr: {1}'.format(
+                response.status_code, response.std_err)
+            )
 
     return path

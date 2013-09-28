@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-
 import os
+import datetime
 
 from django.db import models
+from django.utils.timezone import now
+
 from crawler import search_changelog, _parse_changelog_text
 from allmychanges.utils import cd, get_package_metadata, download_repo
 
@@ -48,8 +50,19 @@ class Repo(models.Model):
             return False
 
     def is_need_processing(self):
-        # todo: me
-        return True
+        if not self.processing_date_started:
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(30):
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(5) and self.processing_state == 'finished':
+            return True
+        elif self.is_processing_started_more_than_minutes_ago(1) and self.processing_state == 'error':
+            return True
+        else:
+            return False
+
+    def is_processing_started_more_than_minutes_ago(self, minutes):
+        return now() > self.processing_date_started + datetime.timedelta(minutes=minutes)
 
     def start_changelog_processing(self):
         path = download_repo(self.url)
@@ -75,7 +88,6 @@ class Repo(models.Model):
                                     for section_item in section['items']:
                                         item.changes.create(type='new', text=section_item)
                             self.save()
-
 
 
 class RepoVersion(models.Model):
