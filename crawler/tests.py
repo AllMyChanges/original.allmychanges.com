@@ -1,6 +1,6 @@
 from . import (_filter_changelog_files, _parse_changelog_text,
                _extract_version, _starts_with_ident, _parse_item)
-from allmychanges.utils import transform_url
+from allmychanges.utils import transform_url, get_markup_type
 from nose.tools import eq_
 
 def test_changelog_finder():
@@ -82,7 +82,7 @@ Bugfix release, released on June 29th 2011
     eq_(1, len(parsed[0]['sections']))
     eq_('(release date to be announced, codename to be selected)',
         parsed[0]['sections'][0]['notes'])
-        
+
     eq_(1, len(parsed[0]['sections'][0]['items']))
     eq_(('Added ``SESSION_REFRESH_EACH_REQUEST`` config key that controls the '
          'set-cookie behavior.  If set to `True` a permanent session will be '
@@ -107,7 +107,7 @@ def test_parse_item():
     eq_((True, 5, 'Blah minor'), _parse_item('  -  Blah minor'))
     eq_((True, 5, 'Blah minor'), _parse_item('  *  Blah minor'))
 
-    
+
 def test_starts_with_ident():
     eq_(False, _starts_with_ident('Blah', 0))
     eq_(False, _starts_with_ident('Blah', 1))
@@ -115,7 +115,7 @@ def test_starts_with_ident():
     eq_(False, _starts_with_ident('  Blah', 1))
     eq_(True,  _starts_with_ident('  Blah', 2))
     eq_(True,  _starts_with_ident(' Blah', 1))
-    
+
 
 def test_url_normalization():
     eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
@@ -126,3 +126,20 @@ def test_url_normalization():
         transform_url('http://github.com/svetlyak40wt/blah'))
     eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
         transform_url('git@github.com:svetlyak40wt/blah'))
+
+
+def test_get_markup_type():
+    eq_('markdown', get_markup_type('README.MD'))
+    eq_('markdown', get_markup_type('README.md'))
+    eq_('markdown', get_markup_type('readme.mD'))
+    eq_('markdown', get_markup_type('readme.txt.md'))
+
+    eq_('rest', get_markup_type('README.RST'))
+    eq_('rest', get_markup_type('README.rst'))
+    eq_('rest', get_markup_type('README.rSt'))
+    eq_('rest', get_markup_type('readme.txt.rst'))
+
+    eq_(None, get_markup_type('README'))
+    eq_(None, get_markup_type('readme.rd'))
+    eq_(None, get_markup_type('readme.txt'))
+    eq_(None, get_markup_type('readme.rst.'))
