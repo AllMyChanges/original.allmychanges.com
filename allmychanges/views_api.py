@@ -10,3 +10,4 @@ class RepoViewSet(DetailSerializerMixin, viewsets.ReadOnlyModelViewSet):
     queryset = Repo.objects.all()
     serializer_class = RepoSerializer
     serializer_detail_class = RepoDetailSerializer
+    queryset_detail = queryset.prefetch_related('versions__items__changes')

@@ -2,15 +2,38 @@
 from rest_framework import serializers
 from rest_framework_extensions.fields import ResourceUriField
 
-from allmychanges.models import Repo, RepoVersion
+from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange
+
+
+class RepoVersionItemChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RepoVersionItemChange
+        fields = (
+            'type',
+            'text',
+        )
+
+
+class RepoVersionItemSerializer(serializers.ModelSerializer):
+    changes = RepoVersionItemChangeSerializer(many=True)
+
+    class Meta:
+        model = RepoVersionItem
+        fields = (
+            'text',
+            'changes',
+        )
 
 
 class RepoVersionSerializer(serializers.ModelSerializer):
+    items = RepoVersionItemSerializer(many=True)
+
     class Meta:
         model = RepoVersion
         fields = (
             'date',
             'name',
+            'items',
         )
 
 

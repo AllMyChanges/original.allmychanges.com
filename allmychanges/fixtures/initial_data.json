@@ -1,0 +1,1752 @@
+[
+  {
+    "pk": 1,
+    "model": "allmychanges.repo",
+    "fields": {
+      "url": "http://allmychanges.com/flask-initial/",
+      "title": "All my changes flask initial"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "1.0"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.10.2"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.10.1"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.10"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.9"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.8.1"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.8"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.7.3"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.7.2"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.7.1"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.7"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.6.1"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.6"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.5.2"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.5.1"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.5"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.4"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.3.1"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.3"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.2"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "allmychanges.repoversion",
+    "fields": {
+      "repo": 1,
+      "date": null,
+      "name": "0.1"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "(release date to be announced, codename to be selected)",
+      "version": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "(bugfix release, release date to be announced)",
+      "version": 2
+    }
+  },
+  {
+    "pk": 3,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "(bugfix release, released on June 14th 2013)",
+      "version": 3
+    }
+  },
+  {
+    "pk": 4,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on June 13nd 2013, codename Limoncello.",
+      "version": 4
+    }
+  },
+  {
+    "pk": 5,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on July 1st 2012, codename Campari.",
+      "version": 5
+    }
+  },
+  {
+    "pk": 6,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, released on July 1st 2012",
+      "version": 6
+    }
+  },
+  {
+    "pk": 7,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on September 29th 2011, codename Rakija",
+      "version": 7
+    }
+  },
+  {
+    "pk": 8,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, release date to be decided",
+      "version": 8
+    }
+  },
+  {
+    "pk": 9,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, released on July 6th 2011",
+      "version": 9
+    }
+  },
+  {
+    "pk": 10,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, released on June 29th 2011",
+      "version": 10
+    }
+  },
+  {
+    "pk": 11,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on June 28th 2011, codename Grappa",
+      "version": 11
+    }
+  },
+  {
+    "pk": 12,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, released on December 31st 2010",
+      "version": 12
+    }
+  },
+  {
+    "pk": 13,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on July 27th 2010, codename Whisky",
+      "version": 13
+    }
+  },
+  {
+    "pk": 14,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": ".. _blinker: http:\/\/pypi.python.org\/pypi\/blinker",
+      "version": 13
+    }
+  },
+  {
+    "pk": 15,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix Release, released on July 15th 2010",
+      "version": 14
+    }
+  },
+  {
+    "pk": 16,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix Release, released on July 6th 2010",
+      "version": 15
+    }
+  },
+  {
+    "pk": 17,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on July 6th 2010, codename Calvados",
+      "version": 16
+    }
+  },
+  {
+    "pk": 18,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on June 18th 2010, codename Rakia",
+      "version": 17
+    }
+  },
+  {
+    "pk": 19,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Bugfix release, released on May 28th 2010",
+      "version": 18
+    }
+  },
+  {
+    "pk": 20,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on May 28th 2010, codename Schnaps",
+      "version": 19
+    }
+  },
+  {
+    "pk": 21,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "Released on May 12th 2010, codename J\u00e4germeister",
+      "version": 20
+    }
+  },
+  {
+    "pk": 22,
+    "model": "allmychanges.repoversionitem",
+    "fields": {
+      "text": "First public preview release.",
+      "version": 21
+    }
+  },
+  {
+    "pk": 1,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added ``SESSION_REFRESH_EACH_REQUEST`` config key that controls the set-cookie behavior.  If set to `True` a permanent session will be refreshed each request and get their lifetime extended, if set to `False` it will only be modified if the session actually modifies. Non permanent sessions are not affected by this and will always expire if the browser window closes.",
+      "version_item": 1,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed broken `test_appcontext_signals()` test case.",
+      "version_item": 2,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Raise an :exc:`AttributeError` in :func:`flask.helpers.find_package` with a useful message explaining why it is raised when a PEP 302 import hook is used without an `is_package()` method.",
+      "version_item": 2,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue where ``|tojson`` was not quoting single quotes which made the filter not work properly in HTML attributes.  Now it's possible to use that filter in single quoted attributes.  This should make using that filter with angular.js easier.",
+      "version_item": 3,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added support for byte strings back to the session system.  This broke compatibility with the common case of people putting binary data for token verification into the session.",
+      "version_item": 3,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue where registering the same method twice for the same endpoint would trigger an exception incorrectly.",
+      "version_item": 3,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Changed default cookie serialization format from pickle to JSON to limit the impact an attacker can do if the secret key leaks.  See :ref:`upgrading-to-010` for more information.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added ``template_test`` methods in addition to the already existing ``template_filter`` method family.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added ``template_global`` methods in addition to the already existing ``template_filter`` method family.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Set the content-length header for x-sendfile.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``tojson`` filter now does not escape script blocks in HTML5 parsers.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``tojson`` used in templates is now safe by default due.  This was allowed due to the different escaping behavior.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask will now raise an error if you attempt to register a new function on an already used endpoint.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added wrapper module around simplejson and added default serialization of datetime objects.  This allows much easier customization of how JSON is handled by Flask or any Flask extension.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Removed deprecated internal ``flask.session`` module alias.  Use ``flask.sessions`` instead to get the session module.  This is not to be confused with ``flask.session`` the session proxy.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Templates can now be rendered without request context.  The behavior is slightly different as the ``request``, ``session`` and ``g`` objects will not be available and blueprint's context processors are not called.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The config object is now available to the template as a real global and not through a context processor which makes it available even in imported templates by default.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added an option to generate non-ascii encoded JSON which should result in less bytes being transmitted over the network.  It's disabled by default to not cause confusion with existing libraries that might expect ``flask.json.dumps`` to return bytestrings by default.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``flask.g`` is now stored on the app context instead of the request context.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``flask.g`` now gained a ``get()`` method for not erroring out on non existing items.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``flask.g`` now can be used with the ``in`` operator to see what's defined and it now is iterable and will yield all attributes stored.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "``flask.Flask.request_globals_class`` got renamed to ``flask.Flask.app_ctx_globals_class`` which is a better name to what it does since 0.10.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "`request`, `session` and `g` are now also added as proxies to the template context which makes them available in imported templates.  One has to be very careful with those though because usage outside of macros might cause caching.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask will no longer invoke the wrong error handlers if a proxy exception is passed through.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added a workaround for chrome's cookies in localhost not working as intended with domain names.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Changed logic for picking defaults for cookie values from sessions to work better with Google Chrome.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `message_flashed` signal that simplifies flashing testing.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added support for copying of request contexts for better working with greenlets.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Removed custom JSON HTTP exception subclasses.  If you were relying on them you can reintroduce them again yourself trivially.  Using them however is strongly discouraged as the interface was flawed.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Python requirements changed: requiring Python 2.6 or 2.7 now to prepare for Python 3.3 port.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Changed how the teardown system is informed about exceptions.  This is now more reliable in case something handles an exception halfway through the error handling process.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Request context preservation in debug mode now keeps the exception information around which means that teardown handlers are able to distinguish error from success cases.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added the ``JSONIFY_PRETTYPRINT_REGULAR`` configuration variable.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask now orders JSON keys by default to not trash HTTP caches due to different hash seeds between different workers.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `appcontext_pushed` and `appcontext_popped` signals.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The builtin run method now takes the ``SERVER_NAME`` into account when picking the default port to run on.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `flask.request.get_json()` as a replacement for the old `flask.request.json` property.",
+      "version_item": 4,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :func:`flask.Request.on_json_loading_failed` now returns a JSON formatted response by default.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :func:`flask.url_for` function now can generate anchors to the generated links.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :func:`flask.url_for` function now can also explicitly generate URL rules specific to a given HTTP method.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Logger now only returns the debug log setting if it was not set explicitly.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Unregister a circular dependency between the WSGI environment and the request object when shutting down the request.  This means that environ ``werkzeug.request`` will be `None` after the response was returned to the WSGI server but has the advantage that the garbage collector is not needed on CPython to tear down the request unless the user created circular dependencies themselves.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Session is now stored after callbacks so that if the session payload is stored in the session you can still modify it in an after request callback.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :class:`flask.Flask` class will avoid importing the provided import name if it can (the required first parameter), to benefit tools which build Flask instances programmatically.  The Flask class will fall back to using import on systems with custom module hooks, e.g. Google App Engine, or when the import name is inside a zip archive (usually a .egg) prior to Python 2.7.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Blueprints now have a decorator to add custom template filters application wide, :meth:`flask.Blueprint.app_template_filter`.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The Flask and Blueprint classes now have a non-decorator method for adding custom template filters application wide, :meth:`flask.Flask.add_template_filter` and :meth:`flask.Blueprint.add_app_template_filter`.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :func:`flask.get_flashed_messages` function now allows rendering flashed message categories in separate blocks, through a ``category_filter`` argument.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :meth:`flask.Flask.run` method now accepts `None` for `host` and `port` arguments, using default values when `None`.  This allows for calling run using configuration values, e.g. ``app.run(app.config.get('MYHOST'), app.config.get('MYPORT'))``, with proper behavior whether or not a config file is provided.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The :meth:`flask.render_template` method now accepts a either an iterable of template names or a single template name.  Previously, it only accepted a single template name.  On an iterable, the first template found is rendered.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :meth:`flask.Flask.app_context` which works very similar to the request context but only provides access to the current application.  This also adds support for URL generation without an active request context.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "View functions can now return a tuple with the first instance being an instance of :class:`flask.Response`.  This allows for returning ``jsonify(error=\"error msg\"), 400`` from a view function.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": ":class:`~flask.Flask` and :class:`~flask.Blueprint` now provide a :meth:`~flask.Flask.get_send_file_max_age` hook for subclasses to override behavior of serving static files from Flask when using :meth:`flask.Flask.send_static_file` (used for the default static file handler) and :func:`~flask.helpers.send_file`.  This hook is provided a filename, which for example allows changing cache controls by file extension. The default max-age for `send_file` and static files can be configured through a new ``SEND_FILE_MAX_AGE_DEFAULT`` configuration variable, which is used in the default `get_send_file_max_age` implementation.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an assumption in sessions implementation which could break message flashing on sessions implementations which use external storage.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Changed the behavior of tuple return values from functions.  They are no longer arguments to the response object, they now have a defined meaning.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :attr:`flask.Flask.request_globals_class` to allow a specific class to be used on creation of the :data:`~flask.g` instance of each request.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `required_methods` attribute to view functions to force-add methods on registration.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :func:`flask.after_this_request`.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :func:`flask.stream_with_context` and the ability to push contexts multiple times without producing unexpected behavior.",
+      "version_item": 5,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue with the undocumented `flask.session` module to not work properly on Python 2.5.  It should not be used but did cause some problems for package managers.",
+      "version_item": 6,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Refactored session support into a session interface so that the implementation of the sessions can be changed without having to override the Flask class.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 61,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Empty session cookies are now deleted properly automatically.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "View functions can now opt out of getting the automatic OPTIONS implementation.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "HTTP exceptions and Bad Request errors can now be trapped so that they show up normally in the traceback.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask in debug mode is now detecting some common problems and tries to warn you about them.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 65,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask in debug mode will now complain with an assertion error if a view was attached after the first request was handled.  This gives earlier feedback when users forget to import view code ahead of time.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added the ability to register callbacks that are only triggered once at the beginning of the first request. (:meth:`Flask.before_first_request`)",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Malformed JSON data will now trigger a bad request HTTP exception instead of a value error which usually would result in a 500 internal server error if not handled.  This is a backwards incompatible change.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Applications now not only have a root path where the resources and modules are located but also an instance path which is the designated place to drop files that are modified at runtime (uploads etc.).  Also this is conceptionally only instance depending and outside version control so it's the perfect place to put configuration files etc.  For more information see :ref:`instance-folders`.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added the ``APPLICATION_ROOT`` configuration variable.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Implemented :meth:`~flask.testing.TestClient.session_transaction` to easily modify sessions from the test environment.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Refactored test client internally.  The ``APPLICATION_ROOT`` configuration variable as well as ``SERVER_NAME`` are now properly used by the test client as defaults.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :attr:`flask.views.View.decorators` to support simpler decorating of pluggable (class-based) views.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue where the test client if used with the \"with\" statement did not trigger the execution of the teardown handlers.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added finer control over the session cookie parameters.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "HEAD requests to a method view now automatically dispatch to the `get` method if no handler was implemented.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Implemented the virtual :mod:`flask.ext` package to import extensions from.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The context preservation on exceptions is now an integral component of Flask itself and no longer of the test client.  This cleaned up some internal logic and lowers the odds of runaway request contexts in unittests.",
+      "version_item": 7,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed the Jinja2 environment's list_templates method not returning the correct names when blueprints or modules were involved.",
+      "version_item": 8,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 79,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue with URL processors not properly working on blueprints.",
+      "version_item": 9,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 80,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added missing future import that broke 2.5 compatibility.",
+      "version_item": 10,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 81,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an infinite redirect issue with blueprints.",
+      "version_item": 10,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :meth:`~flask.Flask.make_default_options_response` which can be used by subclasses to alter the default behavior for `OPTIONS` responses.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Unbound locals now raise a proper :exc:`RuntimeError` instead of an :exc:`AttributeError`.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 84,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Mimetype guessing and etag support based on file objects is now deprecated for :func:`flask.send_file` because it was unreliable. Pass filenames instead or attach your own etags and provide a proper mimetype by hand.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 85,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Static file handling for modules now requires the name of the static folder to be supplied explicitly.  The previous autodetection was not reliable and caused issues on Google's App Engine.  Until 1.0 the old behavior will continue to work but issue dependency warnings.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 86,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "fixed a problem for Flask to run on jython.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 87,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added a `PROPAGATE_EXCEPTIONS` configuration variable that can be used to flip the setting of exception propagation which previously was linked to `DEBUG` alone and is now linked to either `DEBUG` or `TESTING`.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 88,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Flask no longer internally depends on rules being added through the `add_url_rule` function and can now also accept regular werkzeug rules added to the url map.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 89,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added an `endpoint` method to the flask application object which allows one to register a callback to an arbitrary endpoint with a decorator.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 90,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Use Last-Modified for static file sending instead of Date which was incorrectly introduced in 0.6.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 91,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `create_jinja_loader` to override the loader creation process.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 92,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Implemented a silent flag for `config.from_pyfile`.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 93,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added `teardown_request` decorator, for functions that should run at the end of a request regardless of whether an exception occurred.  Also the behavior for `after_request` was changed.  It's now no longer executed when an exception is raised.  See :ref:`upgrading-to-new-teardown-handling`",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 94,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Implemented :func:`flask.has_request_context`",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Deprecated `init_jinja_globals`.  Override the :meth:`~flask.Flask.create_jinja_environment` method instead to achieve the same functionality.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Added :func:`flask.safe_join`",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "The automatic JSON request data unpacking now looks at the charset mimetype parameter.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Don't modify the session on :func:`flask.get_flashed_messages` if there are no messages in the session.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "`before_request` handlers are now able to abort requests with errors.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 100,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "it is not possible to define user exception handlers.  That way you can provide custom error messages from a central hub for certain errors that might occur during request processing (for instance database connection errors, timeouts from remote resources etc.).",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 101,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Blueprints can provide blueprint specific error handlers.",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 102,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Implemented generic :ref:`views` (class-based views).",
+      "version_item": 11,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 103,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue where the default `OPTIONS` response was not exposing all valid methods in the `Allow` header.",
+      "version_item": 12,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 104,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Jinja2 template loading syntax now allows \".\/\" in front of a template load path.  Previously this caused issues with module setups.",
+      "version_item": 12,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 105,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed an issue where the subdomain setting for modules was ignored for the static folder.",
+      "version_item": 12,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 106,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "Fixed a security problem that allowed clients to download arbitrary files if the host server was a windows based operating system and the client uses backslashes to escape the directory the files where exposed from.",
+      "version_item": 12,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 107,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "after request functions are now called in reverse order of registration.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 108,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "OPTIONS is now automatically implemented by Flask unless the application explicitly adds 'OPTIONS' as method to the URL rule. In this case no automatic OPTIONS handling kicks in.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 109,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "static rules are now even in place if there is no static folder for the module.  This was implemented to aid GAE which will remove the static folder if it's part of a mapping in the .yml file.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 110,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "the :attr:`~flask.Flask.config` is now available in the templates as `config`.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 111,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "context processors will no longer override values passed directly to the render function.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 112,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added the ability to limit the incoming request data with the new ``MAX_CONTENT_LENGTH`` configuration value.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 113,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "the endpoint for the :meth:`flask.Module.add_url_rule` method is now optional to be consistent with the function of the same name on the application object.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 114,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added a :func:`flask.make_response` function that simplifies creating response object instances in views.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 115,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added signalling support based on blinker.  This feature is currently optional and supposed to be used by extensions and applications.  If you want to use it, make sure to have `blinker`_ installed.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 116,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "refactored the way URL adapters are created.  This process is now fully customizable with the :meth:`~flask.Flask.create_url_adapter` method.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 117,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "modules can now register for a subdomain instead of just an URL prefix.  This makes it possible to bind a whole module to a configurable subdomain.",
+      "version_item": 13,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 118,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "fixed another issue with loading templates from directories when modules were used.",
+      "version_item": 15,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 119,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "fixes an issue with template loading from directories when modules where used.",
+      "version_item": 16,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 120,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "fixed a bug with subdomains that was caused by the inability to specify the server name.  The server name can now be set with the `SERVER_NAME` config key.  This key is now also used to set the session cookie cross-subdomain wide.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 121,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "autoescaping is no longer active for all templates.  Instead it is only active for ``.html``, ``.htm``, ``.xml`` and ``.xhtml``. Inside templates this behavior can be changed with the ``autoescape`` tag.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 122,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "refactored Flask internally.  It now consists of more than a single file.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 123,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": ":func:`flask.send_file` now emits etags and has the ability to do conditional responses builtin.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 124,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "(temporarily) dropped support for zipped applications.  This was a rarely used feature and led to some confusing behavior.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 125,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for per-package template and static-file directories.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 126,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "removed support for `create_jinja_loader` which is no longer used in 0.5 due to the improved module support.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 127,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added a helper function to expose files from any directory.",
+      "version_item": 17,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 128,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added the ability to register application wide error handlers from modules.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 129,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": ":meth:`~flask.Flask.after_request` handlers are now also invoked if the request dies with an exception and an error handling page kicks in.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 130,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "test client has not the ability to preserve the request context for a little longer.  This can also be used to trigger custom requests that do not pop the request stack for testing.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 131,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "because the Python standard library caches loggers, the name of the logger is configurable now to better support unittests.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 132,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added `TESTING` switch that can activate unittesting helpers.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 133,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "the logger switches to `DEBUG` mode now if debug is enabled.",
+      "version_item": 18,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 134,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "fixed a error reporting bug with :meth:`flask.Config.from_envvar`",
+      "version_item": 19,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 135,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "removed some unused code from flask",
+      "version_item": 19,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 136,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "release does no longer include development leftover files (.git folder for themes, built documentation in zip and pdf file and some .pyc files)",
+      "version_item": 19,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 137,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for categories for flashed messages.",
+      "version_item": 20,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 138,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "the application now configures a :class:`logging.Handler` and will log request handling exceptions to that logger when not in debug mode.  This makes it possible to receive mails on server errors for example.",
+      "version_item": 20,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 139,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for context binding that does not require the use of the with statement for playing in the console.",
+      "version_item": 20,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 140,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "the request context is now available within the with statement making it possible to further push the request context or pop it.",
+      "version_item": 20,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 141,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for configurations.",
+      "version_item": 20,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 142,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "various bugfixes",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 143,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "integrated JSON support",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 144,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added :func:`~flask.get_template_attribute` helper function.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 145,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": ":meth:`~flask.Flask.add_url_rule` can now also register a view function.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 146,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "refactored internal request dispatching.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 147,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "server listens on 127.0.0.1 by default now to fix issues with chrome.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 148,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added external URL support.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 149,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for :func:`~flask.send_file`",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 150,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "module support and internal request handling refactoring to better support pluggable applications.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 151,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "sessions can be set to be permanent now on a per-session basis.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 152,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "better error reporting on missing secret keys.",
+      "version_item": 21,
+      "type": "new"
+    }
+  },
+  {
+    "pk": 153,
+    "model": "allmychanges.repoversionitemchange",
+    "fields": {
+      "text": "added support for Google Appengine.",
+      "version_item": 21,
+      "type": "new"
+    }
+  }
+]

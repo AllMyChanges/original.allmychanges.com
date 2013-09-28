@@ -26,6 +26,7 @@ class RepoVersionItem(models.Model):
     def __unicode__(self):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
 
+
 class RepoVersionItemChange(models.Model):
     REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES = (
         ('new', 'new'),
