@@ -1,6 +1,7 @@
 Django>=1.5,<1.6
 South
 django-vanilla-views
+django-extensions
 
 -e git+git://github.com/svetlyak40wt/pip-tools.git@my-future
 
