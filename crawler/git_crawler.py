@@ -38,18 +38,12 @@ def aggregate_git_log(path):
     """Return versions and commits in standard format"""
     versions = list()
 
-    history_hashes = git_log_hash(path)
-    if not history_hashes:
-        return versions
-
     current_version, current_commits = None, list()
-    s = set()
 
     for rev_hash, date, msg in git_log_hash(path):
         current_commits.append(msg)
         if git_checkout(path=path, revision_hash=rev_hash):
             version = get_package_metadata(path=path, field_name='Version')
-            s.add(version)
             if version != current_version:
                 # memorize it
                 versions.insert(0,
