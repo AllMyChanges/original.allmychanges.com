@@ -1,6 +1,7 @@
 Django>=1.5,<1.6
 South
 djangorestframework
+drf-extensions
 django-extensions
 requests
 envoy

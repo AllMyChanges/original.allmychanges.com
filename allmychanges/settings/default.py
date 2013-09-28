@@ -161,4 +161,12 @@ LOGGING = {
     }
 }
 
+# rest framework
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 10,
+    'DEFAULT_RENDERER_CLASSES': (  # kill BrowsableAPI
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
 from secure_settings import *

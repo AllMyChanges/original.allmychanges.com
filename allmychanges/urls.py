@@ -12,7 +12,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', IndexView.as_view(), name='index'),
-                       
+    url(r'^v1/', include('allmychanges.urls_api')),
                        
     # url(r'^allmychanges/', include('allmychanges.foo.urls')),
 
