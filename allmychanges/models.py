@@ -147,7 +147,6 @@ class Repo(models.Model):
         self.save()
 
                                 
-            
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
     date = models.DateField(blank=True, null=True)

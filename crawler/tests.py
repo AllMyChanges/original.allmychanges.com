@@ -1,7 +1,8 @@
+from nose.tools import eq_
 from . import (_filter_changelog_files, _parse_changelog_text,
                _extract_version, _starts_with_ident, _parse_item)
-from allmychanges.utils import transform_url, get_markup_type
-from nose.tools import eq_
+from allmychanges.utils import transform_url, get_markup_type, get_commit_type
+
 
 def test_changelog_finder():
     in_ = [
@@ -143,3 +144,11 @@ def test_get_markup_type():
     eq_(None, get_markup_type('readme.rd'))
     eq_(None, get_markup_type('readme.txt'))
     eq_(None, get_markup_type('readme.rst.'))
+
+
+def test_get_commit_type():
+    eq_('new', get_commit_type('add new feature'))
+    eq_('new', get_commit_type('new feature was added'))
+    eq_('fix', get_commit_type('fix 100 bags'))
+    eq_('fix', get_commit_type('100 bags were fixed'))
+    eq_('fix', get_commit_type('change some bugfix'))

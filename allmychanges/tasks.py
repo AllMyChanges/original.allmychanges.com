@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from django_rq import job
+
 
 @job
 def update_repo(repo_id):
