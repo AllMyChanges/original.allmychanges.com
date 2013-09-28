@@ -125,7 +125,7 @@ INSTALLED_APPS = (
 
     'allmychanges',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -159,6 +159,14 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+# rest framework
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 10,
+    'DEFAULT_RENDERER_CLASSES': (  # kill BrowsableAPI
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
 from secure_settings import *
