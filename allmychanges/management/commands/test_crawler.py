@@ -1,38 +1,24 @@
-#!/usr/bin/env python
-
 import os
 import requests
 import re
 import envoy
 
-
+from django.core.management.base import BaseCommand
+from django.conf import settings
 from crawler import search_changelog, _parse_changelog_text
-from allmychanges.utils import cd, load_data
+from allmychanges.utils import cd, load_data, transform_url, download_repo
 
 
-
-def test_crawler_on(url):
+def fetch_with_crawler_this(url):
     try:
         if False:
             result = requests.get(url)
             if result.status_code != 200:
                 raise RuntimeError('Bad status code: {0}'.format(result.status_code))
 
-        url, username, repo = transform_url(url)
-        path = '{username}/{repo}'.format(
-            username=username, repo=repo)
+        path = download_repo(url, pull_if_exists=False)
 
-        if False:
-            if os.path.exists(path):
-                with cd(path):
-                    result = envoy.run('git pull'.format(path=path))
-            else:
-                result = envoy.run('git clone {url} {path}'.format(url=url, path=path))
-
-            if result.status_code != 0:
-                raise RuntimeError('Bad status_code from git clone: {0}'.format(result.status_code))
-
-        if os.path.exists(path):
+        if path and os.path.exists(path):
             with cd(path):
                 changelog_filename = search_changelog()
                 if changelog_filename:
@@ -52,33 +38,33 @@ def test_crawler_on(url):
                                 was_parsed = True
                     except Exception:
                         pass
-                    return fullfilename, was_parsed, num_versions, num_items
+                    return fullfilename, was_parsed, num_versions, num_items, False
     finally:
         pass
 
-    return None, False, 0, 0
+    return None, False, 0, 0, path is None
 
         
-def transform_url(url):
-    username, repo = re.search(r'/(?P<username>[A-Za-z0-9-]+)/(?P<repo>.*)', url).groups()
-    return 'git@github.com:{username}/{repo}'.format(**locals()), username, repo
-    
 
+class Command(BaseCommand):
+    help = u"""Tests crawler on selected projects."""
 
+    def handle(self, *args, **options):
+        root = settings.REPO_ROOT
+        reps = load_data(os.path.join(root, 'reps.csv'))
 
-def test():
-    root = os.path.join(os.path.abspath('./'), 'data')
-    reps = load_data(os.path.join(root, 'reps.csv'))
-
-    with cd(root):
         changelogs_found = 0
         changelogs_parsed = 0
         changelogs_versions = 0
         changelogs_items = 0
-        
+        reps_not_found = 0
+
         for name, url in reps:
             try:
-                changelog_filename, was_parsed, num_versions, num_items = test_crawler_on(url)
+                changelog_filename, was_parsed, num_versions, num_items, not_found = fetch_with_crawler_this(url)
+                if not_found:
+                    reps_not_found += 1
+                    
                 if changelog_filename:
                     changelogs_found += 1
                     if was_parsed:
@@ -90,16 +76,13 @@ def test():
             except RuntimeError:
                 pass
 
-    stats = {}
-    stats['crawler.changelogs-found'] = changelogs_found
-    stats['crawler.changelogs-parsed'] = changelogs_parsed
-    stats['crawler.changelog-versions-parsed'] = changelogs_versions
-    stats['crawler.changelog-items-parsed'] = changelogs_items
+        stats = {}
+        stats['crawler.changelogs-found'] = changelogs_found
+        stats['crawler.changelogs-parsed'] = changelogs_parsed
+        stats['crawler.changelog-versions-parsed'] = changelogs_versions
+        stats['crawler.changelog-items-parsed'] = changelogs_items
+        stats['crawler.reps-not-found'] = reps_not_found
 
-    with open('.stats', 'w') as f:
-        for key, value in stats.items():
-            f.write('{key} {value}\n'.format(key=key, value=value))
-
-
-if __name__ == '__main__':
-    test()
+        with open(os.path.join(settings.PROJECT_ROOT, '.stats'), 'w') as f:
+            for key, value in stats.items():
+                f.write('{key} {value}\n'.format(key=key, value=value))

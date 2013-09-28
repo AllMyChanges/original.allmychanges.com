@@ -5,7 +5,7 @@ from django.conf import settings
 
 from crawler import search_changelog, _parse_changelog_text
 from allmychanges.models import Repo
-from allmychanges.utils import cd, get_package_metadata
+from allmychanges.utils import cd, get_package_metadata, download_repo
 
         
 class Command(BaseCommand):
@@ -15,7 +15,12 @@ class Command(BaseCommand):
         for path in args:
             self._update(path)
 
-    def _update(self, path):
+    def _update(self, url):
+        if '://' in url or url.startswith('git@'):
+            path = download_repo(url)
+        else:
+            path = url
+            
         with cd(path):
             changelog_filename = search_changelog()
             if changelog_filename:
@@ -27,7 +32,7 @@ class Command(BaseCommand):
 
                     if changes:
                         repo, created = Repo.objects.get_or_create(
-                            url=fullfilename,
+                            url=url,
                             title=get_package_metadata('.', 'Name'))
                         repo.versions.all().delete()
                         

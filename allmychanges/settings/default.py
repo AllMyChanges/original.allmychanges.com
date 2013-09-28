@@ -166,4 +166,7 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
 }
 
+
+REPO_ROOT = root('data')
+
 from secure_settings import *
