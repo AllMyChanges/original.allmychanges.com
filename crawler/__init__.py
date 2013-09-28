@@ -79,9 +79,6 @@ def _parse_changelog_text(text):
     lines = text.split('\n')
 
     for line in lines:
-        if 'set-cookie behavior' in line or 'SESSION_REFRESH_EACH_REQUEST' in line:
-            import pdb; pdb.set_trace()  # DEBUG
-            
         # skip lines like
         # ===================
         if line and line == line[0] * len(line):

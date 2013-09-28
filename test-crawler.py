@@ -7,7 +7,7 @@ import re
 import envoy
 
 
-from crawler import search_changelog
+from crawler import search_changelog, _parse_changelog_text
 from contextlib import contextmanager
 
 
@@ -58,10 +58,27 @@ def test_crawler_on(url):
             with cd(path):
                 changelog_filename = search_changelog()
                 if changelog_filename:
-                    return os.path.normpath(
+                    fullfilename = os.path.normpath(
                         os.path.join(os.getcwd(), changelog_filename))
+                    was_parsed = False
+                    num_versions = num_items = 0
+                    try:
+                        with open(fullfilename) as f:
+                            changes = _parse_changelog_text(f.read())
+                            num_versions = len(changes)
+                            num_items = sum(len(section['items'])
+                                            for version in changes
+                                            for section in version['sections'])
+
+                            if num_versions > 0 and num_items > 0:
+                                was_parsed = True
+                    except Exception:
+                        pass
+                    return fullfilename, was_parsed, num_versions, num_items
     finally:
         pass
+
+    return None, False, 0, 0
 
         
 def transform_url(url):
@@ -77,22 +94,33 @@ def test():
 
     with cd(root):
         changelogs_found = 0
+        changelogs_parsed = 0
+        changelogs_versions = 0
+        changelogs_items = 0
+        
         for name, url in reps:
             try:
-                changelog_filename = test_crawler_on(url)
+                changelog_filename, was_parsed, num_versions, num_items = test_crawler_on(url)
                 if changelog_filename:
                     changelogs_found += 1
+                    if was_parsed:
+                        changelogs_parsed += 1
+                        changelogs_versions += num_versions
+                        changelogs_items += num_items
                     print changelog_filename
 
             except RuntimeError:
                 pass
 
-    print 'Changelogs found:', changelogs_found
+    stats = {}
+    stats['crawler.changelogs-found'] = changelogs_found
+    stats['crawler.changelogs-parsed'] = changelogs_parsed
+    stats['crawler.changelog-versions-parsed'] = changelogs_versions
+    stats['crawler.changelog-items-parsed'] = changelogs_items
 
     with open('.stats', 'w') as f:
-        f.write('crawler.changelogs-found {0}\n'.format(changelogs_found))
-        f.write('crawler.changelogs-parsed 0\n')
-        f.write('crawler.changelog-versions-parsed 0\n')
+        for key, value in stats.items():
+            f.write('{key} {value}\n'.format(key=key, value=value))
 
 
 if __name__ == '__main__':
