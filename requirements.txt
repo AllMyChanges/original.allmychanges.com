@@ -10,5 +10,10 @@ drf-extensions==0.2
 envoy==0.0.2
 graphitesend==0.1.1
 nose==1.2.1
+python-dateutil==2.1
+pytz==2013d
+redis==2.8.0
 requests==2.0.0
+rq==0.3.11
 six==1.4.1
+times==0.6.2
