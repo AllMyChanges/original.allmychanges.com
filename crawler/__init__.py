@@ -15,6 +15,7 @@ include_predicates = [
     lambda x: 'change' in x,
     lambda x: 'news' in x,
     lambda x: 'release' in x,
+    lambda x: 'history' in x,
 ]
 
 

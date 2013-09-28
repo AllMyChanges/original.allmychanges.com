@@ -6,6 +6,7 @@ from nose.tools import eq_
 def test_changelog_finder():
     in_ = [
           './release.sh',
+          './HISTORY.rst',
           './docs/RELEASE_NOTES.TXT',
           './docs/releases.rst',
           './kiva/agg/freetype2/docs/release',
@@ -23,6 +24,7 @@ def test_changelog_finder():
     ]
 
     out = [
+          './HISTORY.rst',
           './docs/RELEASE_NOTES.TXT',
           './docs/releases.rst',
           './doc/source/manual/AppReleaseNotes.rst',
@@ -118,6 +120,8 @@ def test_starts_with_ident():
 def test_url_normalization():
     eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
         transform_url('https://github.com/svetlyak40wt/blah'))
+    eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
+        transform_url('https://github.com/svetlyak40wt/blah/'))
     eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
         transform_url('http://github.com/svetlyak40wt/blah'))
     eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),

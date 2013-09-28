@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
+
+import os
+
 from django.db import models
+from crawler import search_changelog, _parse_changelog_text
+from allmychanges.utils import cd, get_package_metadata, download_repo
 
 
 MARKUP_CHOICES = (
@@ -47,8 +52,30 @@ class Repo(models.Model):
         return True
 
     def start_changelog_processing(self):
-        # todo: async job
-        pass
+        path = download_repo(self.url)
+        
+        if path:
+            with cd(path):
+                changelog_filename = search_changelog()
+                if changelog_filename:
+                    fullfilename = os.path.normpath(
+                        os.path.join(os.getcwd(), changelog_filename))
+
+                    with open(fullfilename) as f:
+                        changes = _parse_changelog_text(f.read())
+
+                        if changes:
+                            self.title = get_package_metadata('.', 'Name')
+                            self.versions.all().delete()
+
+                            for change in changes:
+                                version = self.versions.create(name=change['version'])
+                                for section in change['sections']:
+                                    item = version.items.create(text=section['notes'])
+                                    for section_item in section['items']:
+                                        item.changes.create(type='new', text=section_item)
+                            self.save()
+
 
 
 class RepoVersion(models.Model):
