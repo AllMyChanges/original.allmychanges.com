@@ -45,9 +45,15 @@
                 data: {url: url},
                 url: '/v1/repos/create-changelog/?format=json'
             }).success(function(data){
-                console.log(data);
+                $scope.start_watching_for_changelog_processing(data.id);
             }).error(function(data){
                 $scope.show_message($scope.create_message_from_dict(data.error_messages), 'danger');
+            });
+        };
+
+        $scope.start_watching_for_changelog_processing = function(repo_id) {
+            $http.get('/v1/repos/' + repo_id + '/').success(function(data){
+                $scope.current_repo = data;
             });
         };
 
@@ -67,72 +73,75 @@
 
 {% block content %}
     {% verbatim %}
-    <div class="container" ng-controller="MainCtrl">
-        <div class="headline">
-            <div class="headline-message headline-message-{{ message.type }}">
-                {{ message.text }}&nbsp;
-            </div>
-
-            <form action="">
-                <div class="input-group">
-                    <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
-                    <span class="input-group-btn">
-                        <input type="submit"
-                               value="Show changelog"
-                               class="btn btn-primary input-group-addon"
-                               style="width: 9em; border-radius: 0px 5px 5px 0px;"/>
-                    </span>
+    <div ng-controller="MainCtrl">
+        <div class="progress-bar">&nbsp;</div>
+        <div class="container">
+            <div class="headline">
+                <div class="headline-message headline-message-{{ message.type }}">
+                    {{ message.text }}&nbsp;
                 </div>
-            </form>
 
-            <div style="text-align: right">
-                Examples:
-                <small ng-repeat="example in examples">
-                    <a href="javascript: false"
-                       style="border-bottom: 1px dotted"
-                       ng-click="set_repo_and_submit(example.title, example.url)">
-                        {{ example.title }}
-                    </a>
-                    <span ng-hide="$last">, </span>
-                </small>
-            </div>
-        </div>
-
-        <div>
-            <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
-                "<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog
-            </h6>
-            <div>
-                <div ng-repeat="version in current_repo.versions" class="change_container">
-                    <div style="margin-bottom: 1em">
-                        <span style="font-weight: bold; font-size: 1.3em; ">Version {{ version.name }}</span>
-                        <span ng-show="version.date"
-                              class="note"
-                              style="font-size: 13px;">
-                            &nbsp;{{ version.date }}
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
+                        <span class="input-group-btn">
+                            <input type="submit"
+                                   value="Show changelog"
+                                   class="btn btn-primary input-group-addon"
+                                   style="width: 9em; border-radius: 0px 5px 5px 0px;"/>
                         </span>
                     </div>
-                    <ul class="list-unstyled">
-                        <li ng-repeat="item in version.items">
-                            <span ng-show="!$first">&nbsp;</span>
-                            <p ng-show="item.text">{{ item.text }}</p>
-                            <div class="row" ng-repeat="change in item.changes" style="padding-bottom: 0.5em;">
-                                <div class="col-md-1">
-                                    <div class="label"
-                                          ng-class="{
-                                              'label-info': change.type == 'new',
-                                              'label-success': change.type == 'fix'
-                                          }"
-                                          style="width: 100%; display: block">
-                                        <b>{{ change.type | uppercase }}</b>
+                </form>
+
+                <div style="text-align: right">
+                    Examples:
+                    <small ng-repeat="example in examples">
+                        <a href="javascript: false"
+                           style="border-bottom: 1px dotted"
+                           ng-click="set_repo_and_submit(example.title, example.url)">
+                            {{ example.title }}
+                        </a>
+                        <span ng-hide="$last">, </span>
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
+                    "<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog
+                </h6>
+                <div>
+                    <div ng-repeat="version in current_repo.versions" class="change_container">
+                        <div style="margin-bottom: 1em">
+                            <span style="font-weight: bold; font-size: 1.3em; ">Version {{ version.name }}</span>
+                            <span ng-show="version.date"
+                                  class="note"
+                                  style="font-size: 13px;">
+                                &nbsp;{{ version.date }}
+                            </span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li ng-repeat="item in version.items">
+                                <span ng-show="!$first">&nbsp;</span>
+                                <p ng-show="item.text">{{ item.text }}</p>
+                                <div class="row" ng-repeat="change in item.changes" style="padding-bottom: 0.5em;">
+                                    <div class="col-md-1">
+                                        <div class="label"
+                                              ng-class="{
+                                                  'label-info': change.type == 'new',
+                                                  'label-success': change.type == 'fix'
+                                              }"
+                                              style="width: 100%; display: block">
+                                            <b>{{ change.type | uppercase }}</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
+                                        {{ change.text }}
                                     </div>
                                 </div>
-                                <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
-                                    {{ change.text }}
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

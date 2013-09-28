@@ -23,8 +23,8 @@ class Repo(models.Model):
         return u'{url}. {title}'.format(url=self.url, title=self.title)
 
     @classmethod
-    def start_changelog_processing(cls, url):
-        repo = Repo.objects.get_or_create(url=url)
+    def start_changelog_processing_for_url(cls, url):
+        repo, is_created = Repo.objects.get_or_create(url=url)
         repo.start_processing_if_needed()
         return repo
 

@@ -19,7 +19,7 @@ class RepoViewSet(DetailSerializerMixin, viewsets.ReadOnlyModelViewSet):
     def create_changelog(self, request, *args, **kwargs):
         serializer = CreateChangelogSerializer(data=request.DATA)
         if serializer.is_valid():
-            repo = Repo.start_changelog_processing(url=serializer.data['url'])
+            repo = Repo.start_changelog_processing_for_url(url=serializer.data['url'])
             return Response(data={'id': repo.id})
         else:
             raise ParseError(detail=serializer.errors)
