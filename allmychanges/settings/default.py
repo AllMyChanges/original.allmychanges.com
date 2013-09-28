@@ -122,6 +122,7 @@ INSTALLED_APPS = (
 
     'south',
     'rest_framework',
+    'django_rq',
 
     'allmychanges',
     # Uncomment the next line to enable the admin:
@@ -168,5 +169,15 @@ REST_FRAMEWORK = {
 
 
 REPO_ROOT = root('data')
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': '',
+   },
+}
 
 from secure_settings import *

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+import times
 
 from django.db import models
 from crawler import search_changelog, _parse_changelog_text
 from allmychanges.utils import cd, get_package_metadata, download_repo
+from allmychanges.tasks import update_repo
 
 
 class Repo(models.Model):
@@ -45,30 +47,61 @@ class Repo(models.Model):
         return True
 
     def start_changelog_processing(self):
-        path = download_repo(self.url)
-        
-        if path:
-            with cd(path):
-                changelog_filename = search_changelog()
-                if changelog_filename:
-                    fullfilename = os.path.normpath(
-                        os.path.join(os.getcwd(), changelog_filename))
+        update_repo.delay(self.id)
 
-                    with open(fullfilename) as f:
-                        changes = _parse_changelog_text(f.read())
+    def _update(self):
+        """Updates changelog (usually in background)."""
+        self.processing_state = 'in_progress'
+        self.processing_status_message = 'Downloading code'
+        self.processing_progress = 50
+        self.processing_date_started = times.now()
+        self.save()
 
-                        if changes:
-                            self.title = get_package_metadata('.', 'Name')
-                            self.versions.all().delete()
+        try:
+            path = download_repo(self.url)
 
-                            for change in changes:
-                                version = self.versions.create(name=change['version'])
-                                for section in change['sections']:
-                                    item = version.items.create(text=section['notes'])
-                                    for section_item in section['items']:
-                                        item.changes.create(type='new', text=section_item)
+            if path:
+                with cd(path):
+                    self.processing_status_message = 'Searching changes'
+                    self.processing_progress = 55
+                    self.save()
+                    changelog_filename = search_changelog()
+                    if changelog_filename:
+                        fullfilename = os.path.normpath(
+                            os.path.join(os.getcwd(), changelog_filename))
+
+                        with open(fullfilename) as f:
+                            self.processing_status_message = 'Parsing changelog'
+                            self.processing_progress = 60
                             self.save()
+                            changes = _parse_changelog_text(f.read())
 
+                            if changes:
+                                self.title = get_package_metadata('.', 'Name')
+                                self.versions.all().delete()
+
+                                self.processing_status_message = 'Updating database'
+                                self.processing_progress = 70
+                                self.save()
+
+                                for change in changes:
+                                    version = self.versions.create(name=change['version'])
+                                    for section in change['sections']:
+                                        item = version.items.create(text=section['notes'])
+                                        for section_item in section['items']:
+                                            item.changes.create(type='new', text=section_item)
+
+                                self.processing_state = 'finished'
+                                self.processing_status_message = 'Done'
+                                self.processing_progress = 100
+                                self.processing_date_finished = times.now()
+                                self.save()
+        except Exception as e:
+            self.processing_state = 'error'
+            self.processing_status_message = str(e)
+            self.processing_progress = 100
+            self.processing_date_finished = times.now()
+            self.save()
 
 
 class RepoVersion(models.Model):
