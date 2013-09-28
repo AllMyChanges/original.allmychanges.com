@@ -3,57 +3,12 @@
 
 {% block extra_head %}
 <script type="text/javascript">
-    function MainCtrl($scope) {
-        $scope.current_repo = {
-            versions: [
-                {
-                    'name': '0.1.3',
-                    'date': '2013-09-15',
-                    'items': [
-                        {
-                            'text': "Backbone now has Controllers and History, for doing client-side routing based on URL fragments. Added emulateHTTP to provide support for legacy servers that dont do PUT and DELETE. Added emulateJSON for servers that can't accept application/json encoded requests. Added Model#clear, which removes all attributes from a model. All Backbone classes may now be seamlessly inherited by CoffeeScript classes.",
-                            'changes': [
-                                {
-                                    'type': 'new',
-                                    'text': 'IOS support'
-                                },
-                                {
-                                    'type': 'fix',
-                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
-                                }
-                            ]
-                        },
-                        {
-                            'text': "Instead of requiring server responses to be namespaced under a model key, now you can define your own parse method to convert responses into attributes for Models and Collections. The old handleEvents function is now named delegateEvents, and is automatically called as part of the View's constructor. Added a toJSON function to Collections. Added Underscore's chain to Collections.",
-                            'changes': [
-                                {
-                                    'type': 'new',
-                                    'text': 'IOS support'
-                                },
-                                {
-                                    'type': 'fix',
-                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
-                                }
-                            ]
-                        },
-                        {
-                            'text': null,
-                            'changes': [
-                                {
-                                    'type': 'new',
-                                    'text': 'IOS support'
-                                },
-                                {
-                                    'type': 'fix',
-                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
-        $scope.current_repo.versions[1] = $scope.current_repo.versions[0];
+    angular.module('allMyChangesApp', ['ngCookies']);
+
+    function MainCtrl($scope, $cookies, $http) {
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+
+        $scope.current_repo = {};
 
         $scope.examples = [
             {
@@ -68,14 +23,22 @@
                 'title': 'Gevent',
                 'url': 'https://github.com/surfly/gevent/'
             }
-        ]
+        ];
 
         $scope.set_repo_and_submit = function(title, url) {
             $scope.current_repo.title = title;
             $scope.current_repo.url = url;
         };
 
-        $scope.set_repo_and_submit($scope.examples[0].title, $scope.examples[0].url);  // for testing
+        $scope.create_changelog_for_url = function(url) {
+            $http.post('/v1/repos/create-changelog/?format=json').success(function(data){
+                console.log(data);
+            });
+        };
+
+        var initial_url = 'http://allmychanges.com/flask-initial/';  // should be created from initial_data.json
+        $scope.current_repo.url = initial_url;
+        $scope.create_changelog_for_url($scope.current_repo.url);
     }
 </script>
 {% endblock extra_head %}
@@ -111,7 +74,7 @@
         </div>
 
         <div>
-            <h6 style="margin-bottom: 1.5em;"><a href="{{ current_repo.url }}">{{ current_repo.title }}</a></h6>
+            <h6 style="margin-bottom: 1.5em;">"<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog</h6>
             <div>
                 <div ng-repeat="version in current_repo.versions" class="change_container">
                     <div style="margin-bottom: 1em">

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import ExtendedDefaultRouter as DefaultRouter
 
 from allmychanges.views_api import RepoViewSet
 
