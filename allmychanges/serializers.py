@@ -61,3 +61,7 @@ class RepoDetailSerializer(RepoSerializer):
             'processing_date_started',
             'processing_date_finished',
         )
+
+
+class CreateChangelogSerializer(serializers.Serializer):
+    url = serializers.URLField()

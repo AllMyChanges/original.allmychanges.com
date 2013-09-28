@@ -9,6 +9,7 @@
         $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
 
         $scope.current_repo = {};
+        $scope.message = {};
 
         $scope.examples = [
             {
@@ -25,15 +26,35 @@
             }
         ];
 
+        $scope.create_message_from_dict = function(dict) {
+            var messages = [];
+            $.each(dict, function(key, value){
+                messages.push(key.toUpperCase() + ': ' + value.join(' '))
+            });
+            return messages.join('; ')
+        };
+
         $scope.set_repo_and_submit = function(title, url) {
             $scope.current_repo.title = title;
             $scope.current_repo.url = url;
         };
 
         $scope.create_changelog_for_url = function(url) {
-            $http.post('/v1/repos/create-changelog/?format=json').success(function(data){
+            $http({
+                method: 'POST',
+                data: {url: url},
+                url: '/v1/repos/create-changelog/?format=json'
+            }).success(function(data){
                 console.log(data);
+            }).error(function(data){
+                $scope.show_message($scope.create_message_from_dict(data.error_messages), 'danger');
             });
+        };
+
+        $scope.show_message = function(text, type) {
+            var type = type || null;
+            $scope.message.type = type;
+            $scope.message.text = text;
         };
 
         var initial_url = 'http://allmychanges.com/flask-initial/';  // should be created from initial_data.json
@@ -48,6 +69,10 @@
     {% verbatim %}
     <div class="container" ng-controller="MainCtrl">
         <div class="headline">
+            <div class="headline-message headline-message-{{ message.type }}">
+                {{ message.text }}&nbsp;
+            </div>
+
             <form action="">
                 <div class="input-group">
                     <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
@@ -74,7 +99,9 @@
         </div>
 
         <div>
-            <h6 style="margin-bottom: 1.5em;">"<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog</h6>
+            <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
+                "<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog
+            </h6>
             <div>
                 <div ng-repeat="version in current_repo.versions" class="change_container">
                     <div style="margin-bottom: 1em">

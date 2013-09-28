@@ -27,7 +27,23 @@
         }
 
         .headline {
-            padding: 73px 0 10px 0;
+            padding: 2.5em 0 1em 0;
+        }
+        .headline-message {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+        .headline-message-success {
+            color: #58d68d;
+        }
+        .headline-message-info {
+            color: #5dade2;
+        }
+        .headline-message-warning {
+            color: #f5d313;
+        }
+        .headline-message-danger {
+            color: #ec7063;
         }
 
         .change_container {
@@ -55,7 +71,7 @@
 
 <body>
     {% block content %}{% endblock content %}
-    <footer class="footer">
+    <footer class="footer navbar-fixed-bottom">
         <div class="container" style="padding-top: 0.5em; padding-bottom: 0.5em; text-align: center;">
             <small>
                 &copy; <a href="http://djangodash.com/teams/c4/changers/">Changers team</a>,

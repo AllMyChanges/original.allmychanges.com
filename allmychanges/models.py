@@ -22,6 +22,27 @@ class Repo(models.Model):
     def __unicode__(self):
         return u'{url}. {title}'.format(url=self.url, title=self.title)
 
+    @classmethod
+    def start_changelog_processing(cls, url):
+        repo = Repo.objects.get_or_create(url=url)
+        repo.start_processing_if_needed()
+        return repo
+
+    def start_processing_if_needed(self):
+        if self.is_need_processing:
+            self.start_changelog_processing()
+            return True
+        else:
+            return False
+
+    def is_need_processing(self):
+        # todo: me
+        return True
+
+    def start_changelog_processing(self):
+        # todo: async job
+        pass
+
 
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
