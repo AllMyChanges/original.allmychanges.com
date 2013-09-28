@@ -6,6 +6,7 @@ from django.db import models
 from django.utils.timezone import now
 
 from crawler import search_changelog, _parse_changelog_text
+from crawler.git_crawler import aggregate_git_log
 from allmychanges.utils import cd, get_package_metadata, download_repo
 from allmychanges.tasks import update_repo
 
@@ -87,42 +88,65 @@ class Repo(models.Model):
                     changelog_filename = search_changelog()
                     if changelog_filename:
                         fullfilename = os.path.normpath(
-                            os.path.join(os.getcwd(), changelog_filename))
+                            os.path.join(os.getcwd(), filename))
 
-                        with open(fullfilename) as f:
-                            self.processing_status_message = 'Parsing changelog'
-                            self.processing_progress = 60
-                            self.save()
-                            changes = _parse_changelog_text(f.read())
+                        self._update_from_filename(full_filename)
+                    else:
+                        self._update_from_git_log(path)
 
-                            if changes:
-                                self.title = get_package_metadata('.', 'Name')
-                                self.versions.all().delete()
-
-                                self.processing_status_message = 'Updating database'
-                                self.processing_progress = 70
-                                self.save()
-
-                                for change in changes:
-                                    version = self.versions.create(name=change['version'])
-                                    for section in change['sections']:
-                                        item = version.items.create(text=section['notes'])
-                                        for section_item in section['items']:
-                                            item.changes.create(type='new', text=section_item)
-
-                                self.processing_state = 'finished'
-                                self.processing_status_message = 'Done'
-                                self.processing_progress = 100
-                                self.processing_date_finished = now()
-                                self.save()
         except Exception as e:
             self.processing_state = 'error'
-            self.processing_status_message = str(e)
+            self.processing_status_message = str(e)[:255]
             self.processing_progress = 100
             self.processing_date_finished = now()
             self.save()
 
+    def _update_from_git_log(self, path):
+        changes = aggregate_git_log(path)
+        if changes:
+            self._update_from_changes(changes)
+        
+    def _update_from_filename(self, filename):
+        with open(fullfilename) as f:
+            self.processing_status_message = 'Parsing changelog'
+            self.processing_progress = 60
+            self.save()
+            changes = _parse_changelog_text(f.read())
+            self._update_from_changes(changes)
+            
 
+    def _update_from_changes(self, changes):
+        """Update changelog in database, taking data from python-structured changelog."""
+        self.title = get_package_metadata('.', 'Name')
+        if self.title is None:
+            self.title = self.url.rsplit('/', 1)[-1]
+        
+        if changes:
+            self.versions.all().delete()
+            self.processing_status_message = 'Updating database'
+            self.processing_progress = 70
+            self.save()
+
+            for change in changes:
+                version = self.versions.create(name=change['version'])
+                for section in change['sections']:
+                    item = version.items.create(text=section['notes'])
+                    for section_item in section['items']:
+                        item.changes.create(type='new', text=section_item)
+
+                        self.processing_state = 'finished'
+                        self.processing_status_message = 'Done'
+                        self.processing_progress = 100
+                        self.processing_date_finished = now()
+        else:
+            self.processing_state = 'error'
+            self.processing_status_message = 'Changelog not found'
+            self.processing_progress = 100
+            self.processing_date_finished = now()
+            
+        self.save()
+
+                                
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
     date = models.DateField(blank=True, null=True)
