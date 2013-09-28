@@ -7,7 +7,7 @@ from django.utils.timezone import now
 
 from crawler import search_changelog, _parse_changelog_text
 from crawler.git_crawler import aggregate_git_log
-from allmychanges.utils import cd, get_package_metadata, download_repo
+from allmychanges.utils import cd, get_package_metadata, download_repo, get_commit_type, get_markup_type
 from allmychanges.tasks import update_repo
 
 
@@ -107,22 +107,22 @@ class Repo(models.Model):
         changes = aggregate_git_log(path)
         if changes:
             self._update_from_changes(changes)
-        
+
     def _update_from_filename(self, filename):
         with open(filename) as f:
+            self.changelog_markup = get_markup_type(filename)
             self.processing_status_message = 'Parsing changelog'
             self.processing_progress = 60
             self.save()
             changes = _parse_changelog_text(f.read())
             self._update_from_changes(changes)
-            
 
     def _update_from_changes(self, changes):
         """Update changelog in database, taking data from python-structured changelog."""
         self.title = get_package_metadata('.', 'Name')
         if self.title is None:
             self.title = self.url.rsplit('/', 1)[-1]
-        
+
         if changes:
             self.versions.all().delete()
             self.processing_status_message = 'Updating database'
@@ -135,7 +135,7 @@ class Repo(models.Model):
 
                     item = version.items.create(text=section['notes'])
                     for section_item in section['items']:
-                        item.changes.create(type='new', text=section_item)
+                        item.changes.create(type=get_commit_type(section_item), text=section_item)
 
                         self.processing_state = 'finished'
                         self.processing_status_message = 'Done'
@@ -146,10 +146,10 @@ class Repo(models.Model):
             self.processing_status_message = 'Changelog not found'
             self.processing_progress = 100
             self.processing_date_finished = now()
-            
+
         self.save()
 
-                                
+
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
     date = models.DateField(blank=True, null=True)
