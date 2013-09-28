@@ -5,7 +5,7 @@
 <script type="text/javascript">
     angular.module('allMyChangesApp', ['ngCookies']);
 
-    function MainCtrl($scope, $cookies, $http, $timeout) {
+    function MainCtrl($scope, $cookies, $http, $timeout, $location) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
 
         $scope.current_repo = {};
@@ -17,8 +17,8 @@
                 'url': 'https://github.com/kennethreitz/requests'
             },
             {
-                'title': 'Flask',
-                'url': 'https://github.com/mitsuhiko/flask/'
+                'title': 'Sentry',
+                'url': 'https://github.com/getsentry/sentry/'
             },
             {
                 'title': 'Gevent',
@@ -35,6 +35,7 @@
         };
 
         $scope.create_changelog_for_url = function(url) {
+            $location.search({'url': url});
             $scope.current_repo = {
                 url: url
             };
@@ -87,9 +88,12 @@
             $scope.message.text = text;
         };
 
-//        var initial_url = 'http://allmychanges.com/flask-initial/';  // should be created from initial_data.json
-        var initial_url = 'https://github.com/kennethreitz/requests';  // should be created from initial_data.json
-        $scope.current_repo.url = initial_url;
+        var initial_url = 'https://github.com/kennethreitz/requests';
+        if (angular.isString($location.search()['url'])) {
+            initial_url = $location.search()['url'];
+        }
+        var url = initial_url;
+        $scope.current_repo.url = url;
         $scope.create_changelog_for_url($scope.current_repo.url);
     }
 </script>
@@ -135,7 +139,7 @@
 
             <div>
                 <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
-                    "<a href="{{ current_repo.url }}">{{ current_repo.title }}</a>" changelog
+                    "<a href="{{ current_repo.url }}" target="_blank">{{ current_repo.title }}</a>" changelog
                 </h6>
                 <div>
                     <div ng-repeat="version in current_repo.versions" class="change_container">
