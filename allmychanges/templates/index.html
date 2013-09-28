@@ -8,7 +8,22 @@
  <input type="submit"/>
 </form>
 
-{% if job_id %}
- job id is {{ job_id }}
+{% if changes %}
+  <dl>
+    {% for change in changes %}
+      <dt>{{ change.version }}</dt>
+      <dd>
+        {% for section in change.sections %}
+          <p>{{ section.title }}</p>
+          <p>{{ section.notes }}</p>
+          <ul>
+            {% for item in section.items %}
+              <li>{{ item }}</li>
+            {% endfor %}
+         </ul>
+        {% endfor %}
+      </dd>
+    {% endfor %}
+  </dl>
 {% endif %}
 {% endblock %}
