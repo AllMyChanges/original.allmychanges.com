@@ -30,4 +30,6 @@ class RepoSerializer(serializers.ModelSerializer):
 
 class RepoDetailSerializer(RepoSerializer):
     class Meta(RepoSerializer.Meta):
-        fields = RepoSerializer.Meta.fields
+        fields = RepoSerializer.Meta.fields + (
+            'versions',
+        )
