@@ -2,6 +2,12 @@
 from django.db import models
 
 
+MARKUP_CHOICES = (
+    ('markdown', 'markdown'),
+    ('rest', 'rest'),
+)
+
+
 class Repo(models.Model):
     PROCESSING_STATE_CHOICES = (
         ('in_progress', 'In progress'),
@@ -11,6 +17,7 @@ class Repo(models.Model):
 
     url = models.URLField(unique=True)
     title = models.CharField(max_length=255)
+    changelog_markup = models.CharField(max_length=20, choices=MARKUP_CHOICES, blank=True, null=True)
 
     # processing fields
     processing_state = models.CharField(max_length=20, choices=PROCESSING_STATE_CHOICES, null=True)
