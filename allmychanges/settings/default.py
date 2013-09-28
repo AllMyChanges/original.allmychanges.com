@@ -151,11 +151,17 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'file_catchall': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/allmychanges/catchall.log'
+        },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['file_catchall', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
