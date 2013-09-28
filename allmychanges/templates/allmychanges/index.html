@@ -34,13 +34,11 @@
             return messages.join('; ')
         };
 
-        $scope.set_repo_and_submit = function(title, url) {
-            $scope.current_repo.title = title;
-            $scope.current_repo.url = url;
-        };
-
         $scope.create_changelog_for_url = function(url) {
-            $scope.message = {};
+            $scope.current_repo = {
+                url: url
+            };
+            $scope.show_message('Starting processing...');
             $http({
                 method: 'POST',
                 data: {url: url},
@@ -60,9 +58,12 @@
                     $scope.current_repo.processing_status_message,
                     $scope.get_message_type_for_repo($scope.current_repo)
                 );
+
                 if ($scope.current_repo.processing_state == 'in_progress') {
                     $timeout(function(){
-                        $scope.start_watching_for_changelog_processing($scope.current_repo.id);
+                        $scope.start_watching_for_changelog_processing(
+                            $scope.current_repo.id
+                        );
                     }, 1000);
                 }
             });
@@ -124,7 +125,7 @@
                     <small ng-repeat="example in examples">
                         <a href="javascript: false"
                            style="border-bottom: 1px dotted"
-                           ng-click="set_repo_and_submit(null, example.url)">
+                           ng-click="create_changelog_for_url(example.url)">
                             {{ example.title }}
                         </a>
                         <span ng-hide="$last">, </span>
