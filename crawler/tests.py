@@ -61,11 +61,20 @@ Version 0.10.2
 - Raise an :exc:`AttributeError` in :func:`flask.helpers.find_package` with a
   useful message explaining why it is raised when a PEP 302 import hook is used
   without an `is_package()` method.
+
+Version 0.7.1
+-------------
+
+Bugfix release, released on June 29th 2011
+
+- Added missing future import that broke 2.5 compatibility.
+- Fixed an infinite redirect issue with blueprints.
 """
     parsed = _parse_changelog_text(input)
-    eq_(2, len(parsed))
+    eq_(3, len(parsed))
     eq_('1.0', parsed[0]['version'])
     eq_('0.10.2', parsed[1]['version'])
+    eq_('0.7.1', parsed[2]['version'])
 
     eq_(1, len(parsed[0]['sections']))
     eq_('(release date to be announced, codename to be selected)',
@@ -84,6 +93,7 @@ def test_extract_version():
     eq_(None, _extract_version('Just a text with some 1 33 nubers'))
     eq_('1.0', _extract_version('Version 1.0'))
     eq_('0.10.2', _extract_version('Version 0.10.2'))
+    eq_(None, _extract_version('  some number in the item\'s text 0.1'))
 
 
 def test_parse_item():

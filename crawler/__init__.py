@@ -40,9 +40,9 @@ def search_changelog():
 
 
 def _extract_version(line):
-    match = re.search(r'\d+\.\d+\.\d+|\d+\.\d+', line)
+    match = re.search(r'^[^ ].*?(\d+\.\d+\.\d+|\d+\.\d+)', line)
     if match is not None:
-        return match.group(0)
+        return match.group(1)
 
 
 def _parse_item(line):
@@ -84,41 +84,42 @@ def _parse_changelog_text(text):
         if line and line == line[0] * len(line):
             continue
             
-        version = _extract_version(line)
-        if version is not None:
-            # we found a possible version number, lets
-            # start collecting the changes!
-            current_version = dict(version=version, sections=[])
-            current_section = None
-            current_item = None
-            current_ident = None
-            
-            changelog.append(current_version)
+
+        is_item, ident, text = _parse_item(line)
+        if is_item:
+            # wow, a new changelog item was found!
+            current_item = [text]
+            current_ident = ident
+            current_section['items'].append(current_item)
         else:
-            is_item, ident, text = _parse_item(line)
-            if is_item:
-                # wow, a new changelog item was found!
-                current_item = [text]
-                current_ident = ident
-                current_section['items'].append(current_item)
+            version = _extract_version(line)
+            if version is not None:
+                # we found a possible version number, lets
+                # start collecting the changes!
+                current_version = dict(version=version, sections=[])
+                current_section = None
+                current_item = None
+                current_ident = None
+
+                changelog.append(current_version)
+                
+            elif _starts_with_ident(line, current_ident) and current_item:
+                # previous changelog item has continuation on the
+                # next line
+                current_item.append(line[current_ident:])
             else:
-                if _starts_with_ident(line, current_ident) and current_item:
-                    # previous changelog item has continuation on the
-                    # next line
-                    current_item.append(line[current_ident:])
-                else:
-                    # if this is not item, then this is a note
-                    if current_version is not None:
-                        if not current_section or current_section['items']:
-                            # if there is items in the current section
-                            # and we found another plaintext part,
-                            # then start another section
-                            current_section = dict(notes=[line], items=[])
-                            current_version['sections'].append(current_section)
-                        else:
-                            # otherwise, continue note of the curent
-                            # section
-                            current_section['notes'].append(line)
+                # if this is not item, then this is a note
+                if current_version is not None:
+                    if not current_section or current_section['items']:
+                        # if there is items in the current section
+                        # and we found another plaintext part,
+                        # then start another section
+                        current_section = dict(notes=[line], items=[])
+                        current_version['sections'].append(current_section)
+                    else:
+                        # otherwise, continue note of the curent
+                        # section
+                        current_section['notes'].append(line)
 
     return _finalize_changelog(changelog)
 
