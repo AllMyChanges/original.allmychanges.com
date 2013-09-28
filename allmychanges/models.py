@@ -13,7 +13,7 @@ class Repo(models.Model):
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
     date = models.DateField(blank=True, null=True)
-    version = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.version
