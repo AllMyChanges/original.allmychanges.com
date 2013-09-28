@@ -87,8 +87,8 @@ class Repo(models.Model):
                     self.save()
                     changelog_filename = search_changelog()
                     if changelog_filename:
-                        fullfilename = os.path.normpath(
-                            os.path.join(os.getcwd(), filename))
+                        full_filename = os.path.normpath(
+                            os.path.join(os.getcwd(), changelog_filename))
 
                         self._update_from_filename(full_filename)
                     else:
@@ -108,7 +108,7 @@ class Repo(models.Model):
             self._update_from_changes(changes)
         
     def _update_from_filename(self, filename):
-        with open(fullfilename) as f:
+        with open(filename) as f:
             self.processing_status_message = 'Parsing changelog'
             self.processing_progress = 60
             self.save()

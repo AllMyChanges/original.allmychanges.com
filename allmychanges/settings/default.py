@@ -179,7 +179,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'task': {
+        'tasks': {
             'handlers': ['workers_catchall', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
