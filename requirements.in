@@ -1,6 +1,6 @@
 Django>=1.5,<1.6
 South
-django-vanilla-views
+djangorestframework
 django-extensions
 requests
 envoy

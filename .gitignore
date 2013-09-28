@@ -39,3 +39,5 @@ nosetests.xml
 /static
 /data
 .stats
+.idea
+/src/
