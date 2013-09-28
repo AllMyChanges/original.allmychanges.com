@@ -4,6 +4,7 @@ import string
 import envoy
 
 from contextlib import contextmanager
+from django.conf import settings
 
 
 def load_data(filename):
@@ -45,3 +46,39 @@ def get_package_metadata(path, field_name):
                     match = re.search(r'{0}: (.*)'.format(field_name), f.read())
                     if match is not None:
                         return match.group(1)
+
+
+def transform_url(url):
+    """Normalizes url to 'git@github.com:{username}/{repo}' and also
+    returns username and repository's name."""
+    username, repo = re.search(r'[/:](?P<username>[A-Za-z0-9-]+)/(?P<repo>.*)', url).groups()
+    if url.startswith('git@'):
+        return url, username, repo
+    return 'git@github.com:{username}/{repo}'.format(**locals()), username, repo
+    
+
+
+def download_repo(url, pull_if_exists=True):
+    url, username, repo = transform_url(url)
+
+    path = os.path.join(settings.REPO_ROOT, username, repo)
+
+    if os.path.exists(os.path.join(path, '.failed')):
+        return None
+
+    if os.path.exists(path):
+        if pull_if_exists:
+            with cd(path):
+                response = envoy.run('git pull'.format(path=path))
+                if response.status_code != 0:
+                    raise RuntimeError('Bad status_code from git pull: {0}'.format(response.status_code))
+    else:
+        response = envoy.run('git clone {url} {path}'.format(url=url, path=path))
+
+        if response.status_code != 0:
+            os.makedirs(path)
+            with open(os.path.join(path, '.failed'), 'w') as f:
+                f.write('')
+            raise RuntimeError('Bad status_code from git clone: {0}'.format(response.status_code))
+
+    return path

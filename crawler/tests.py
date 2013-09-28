@@ -1,5 +1,6 @@
 from . import (_filter_changelog_files, _parse_changelog_text,
                _extract_version, _starts_with_ident, _parse_item)
+from allmychanges.utils import transform_url
 from nose.tools import eq_
 
 def test_changelog_finder():
@@ -114,4 +115,10 @@ def test_starts_with_ident():
     eq_(True,  _starts_with_ident(' Blah', 1))
     
 
-    
+def test_url_normalization():
+    eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
+        transform_url('https://github.com/svetlyak40wt/blah'))
+    eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
+        transform_url('http://github.com/svetlyak40wt/blah'))
+    eq_(('git@github.com:svetlyak40wt/blah', 'svetlyak40wt', 'blah'),
+        transform_url('git@github.com:svetlyak40wt/blah'))
