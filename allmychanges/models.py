@@ -16,13 +16,15 @@ class RepoVersion(models.Model):
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.version
+        return self.name
 
 
 class RepoVersionItem(models.Model):
     version = models.ForeignKey(RepoVersion, related_name='items')
     text = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
 
 class RepoVersionItemChange(models.Model):
     REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES = (
