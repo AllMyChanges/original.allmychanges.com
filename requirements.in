@@ -2,6 +2,12 @@ Django>=1.5,<1.6
 South
 djangorestframework
 django-extensions
+requests
+envoy
+graphitesend
+nose
 
 -e git+git://github.com/svetlyak40wt/pip-tools.git@my-future
+-e git+git://github.com/svetlyak40wt/nose-notify-tmux.git
+-e git+git://github.com/svetlyak40wt/tdaemon.git@develop
 
