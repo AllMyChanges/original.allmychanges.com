@@ -38,3 +38,4 @@ nosetests.xml
 /secure_settings.py
 /static
 .idea
+/src/
