@@ -51,6 +51,7 @@ class Repo(models.Model):
         else:
             return False
 
+    @property
     def is_need_processing(self):
         if not self.processing_date_started:
             return True
