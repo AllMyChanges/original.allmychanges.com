@@ -66,6 +66,12 @@
                             $scope.current_repo.id
                         );
                     }, 1000);
+                }else{
+                    if ($scope.current_repo.processing_state == 'finished') {
+                        $timeout(function(){
+                            $scope.message = {};
+                        }, 3000);
+                    }
                 }
             });
         };

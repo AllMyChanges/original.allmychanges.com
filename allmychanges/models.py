@@ -122,6 +122,7 @@ class Repo(models.Model):
             self.processing_date_finished = now()
             self.save()
 
+
 class RepoVersion(models.Model):
     repo = models.ForeignKey(Repo, related_name='versions')
     date = models.DateField(blank=True, null=True)
