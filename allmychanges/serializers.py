@@ -55,4 +55,9 @@ class RepoDetailSerializer(RepoSerializer):
     class Meta(RepoSerializer.Meta):
         fields = RepoSerializer.Meta.fields + (
             'versions',
+            'processing_state',
+            'processing_status_message',
+            'processing_progress',
+            'processing_date_started',
+            'processing_date_finished',
         )

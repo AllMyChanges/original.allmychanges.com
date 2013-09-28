@@ -4,7 +4,10 @@
     "model": "allmychanges.repo",
     "fields": {
       "url": "http://allmychanges.com/flask-initial/",
-      "title": "All my changes flask initial"
+      "title": "All my changes flask initial",
+      "processing_state": "finished",
+      "processing_status_message": null,
+      "processing_progress": 100
     }
   },
   {
