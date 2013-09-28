@@ -110,7 +110,6 @@
     {% verbatim %}
     <div ng-controller="MainCtrl">
         <div class="progress-bar"
-             ng-show="current_repo.processing_state=='in_progress'"
              style="width: {{ current_repo.processing_progress }}%;">&nbsp;</div>
         <div class="container">
             <div class="headline">
@@ -130,8 +129,8 @@
                     </div>
                 </form>
 
-                <div style="text-align: right">
-                    Examples:
+                <div style="text-align: right;">
+                    <small>Examples:</small>
                     <small ng-repeat="example in examples">
                         <a href="javascript: false"
                            style="border-bottom: 1px dotted"
@@ -139,6 +138,12 @@
                             {{ example.title }}
                         </a>
                         <span ng-hide="$last">, </span>
+                    </small>.
+                    <small>
+                        Save it to your favorites with <a href="javascript:location.href='http://allmychanges.com/#?url=' + encodeURIComponent(location.href)"
+                           style="border-bottom: 1px dotted">
+                            bookmarklet
+                        </a>
                     </small>
                 </div>
             </div>
