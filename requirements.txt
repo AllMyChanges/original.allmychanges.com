@@ -3,6 +3,7 @@
 -e git+git://github.com/svetlyak40wt/tdaemon.git@0c6eaaa39aec5dd8c51366476acba3d8aff0d78d#egg=tdaemon
 Django==1.5.4
 South==0.8.2
+django-debug-toolbar==0.9.4
 django-extensions==1.2.2
 djangorestframework==2.3.8
 drf-extensions==0.2
