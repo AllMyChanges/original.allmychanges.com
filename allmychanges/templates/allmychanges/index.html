@@ -34,7 +34,19 @@
     <div class="container" ng-controller="MainCtrl">
         <div class="headline">
             <h6 style="text-align: center">All my changes</h6>
-            <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="repo_url">
+
+            <form action="">
+                <div class="input-group">
+                    <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="repo_url">
+                    <span class="input-group-btn">
+                        <input type="submit"
+                               value="Show changelog"
+                               class="btn btn-primary input-group-addon"
+                               style="width: 9em; border-radius: 0px 5px 5px 0px;"/>
+                    </span>
+                </div>
+            </form>
+
             <div style="text-align: right">
                 Examples:
                 <small ng-repeat="example in examples">
