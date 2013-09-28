@@ -7,56 +7,53 @@
         $scope.current_repo = {
             versions: [
                 {
-                    'version': '0.1.3',
+                    'name': '0.1.3',
                     'date': '2013-09-15',
                     'items': [
                         {
-                            'text': 'Support for fallback languages. Allows fine grained configuration through project settings and TranslationOptions on model basis. (thanks to Jacek Tomaszewski, resolves issue #104)',
-                            'type': 'fix'
+                            'text': "Backbone now has Controllers and History, for doing client-side routing based on URL fragments. Added emulateHTTP to provide support for legacy servers that dont do PUT and DELETE. Added emulateJSON for servers that can't accept application/json encoded requests. Added Model#clear, which removes all attributes from a model. All Backbone classes may now be seamlessly inherited by CoffeeScript classes.",
+                            'changes': [
+                                {
+                                    'type': 'new',
+                                    'text': 'IOS support'
+                                },
+                                {
+                                    'type': 'fix',
+                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
+                                }
+                            ]
                         },
                         {
-                            'text': 'Ядро 2',
-                            'type': 'new'
-                        }
-                    ]
-                },
-                {
-                    'version': '0.1.0',
-                    'date': '2013-01-15',
-                    'items': [
-                        {
-                            'text': 'Ядро 1',
-                            'type': 'fix'
+                            'text': "Instead of requiring server responses to be namespaced under a model key, now you can define your own parse method to convert responses into attributes for Models and Collections. The old handleEvents function is now named delegateEvents, and is automatically called as part of the View's constructor. Added a toJSON function to Collections. Added Underscore's chain to Collections.",
+                            'changes': [
+                                {
+                                    'type': 'new',
+                                    'text': 'IOS support'
+                                },
+                                {
+                                    'type': 'fix',
+                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
+                                }
+                            ]
                         },
                         {
-                            'text': 'Ядро 2',
-                            'type': 'new'
-                        },
-                        {
-                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
-                            'type': 'new'
-                        }
-                    ]
-                },
-                {
-                    'version': '0.0.1',
-                    'items': [
-                        {
-                            'text': 'Ядро 1',
-                            'type': 'fix'
-                        },
-                        {
-                            'text': 'Ядро 2',
-                            'type': 'new'
-                        },
-                        {
-                            'text': 'sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.',
-                            'type': 'new'
+                            'text': null,
+                            'changes': [
+                                {
+                                    'type': 'new',
+                                    'text': 'IOS support'
+                                },
+                                {
+                                    'type': 'fix',
+                                    'text': 'Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. Android support. '
+                                }
+                            ]
                         }
                     ]
                 }
             ]
         };
+        $scope.current_repo.versions[1] = $scope.current_repo.versions[0];
 
         $scope.examples = [
             {
@@ -118,28 +115,30 @@
             <div>
                 <div ng-repeat="version in current_repo.versions" class="change_container">
                     <div style="margin-bottom: 1em">
-                        <span style="font-weight: bold; font-size: 1.3em; ">Version {{ change.version }}</span>
-                        <span ng-show="change.date"
+                        <span style="font-weight: bold; font-size: 1.3em; ">Version {{ version.name }}</span>
+                        <span ng-show="version.date"
                               class="note"
                               style="font-size: 13px;">
-                            &nbsp;{{ change.date }}
+                            &nbsp;{{ version.date }}
                         </span>
                     </div>
                     <ul class="list-unstyled">
-                        <li ng-repeat="item in change.items" style="padding: 0.5em 0;">
-                            <div class="row">
+                        <li ng-repeat="item in version.items">
+                            <span ng-show="!$first">&nbsp;</span>
+                            <p ng-show="item.text">{{ item.text }}</p>
+                            <div class="row" ng-repeat="change in item.changes" style="padding-bottom: 0.5em;">
                                 <div class="col-md-1">
                                     <div class="label"
                                           ng-class="{
-                                              'label-info': item.type == 'new',
-                                              'label-success': item.type == 'fix'
+                                              'label-info': change.type == 'new',
+                                              'label-success': change.type == 'fix'
                                           }"
                                           style="width: 100%; display: block">
-                                        {{ item.type | uppercase }}
+                                        <b>{{ change.type | uppercase }}</b>
                                     </div>
                                 </div>
                                 <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
-                                    {{ item.text }}
+                                    {{ change.text }}
                                 </div>
                             </div>
                         </li>

@@ -20,11 +20,16 @@ class RepoVersion(models.Model):
 
 
 class RepoVersionItem(models.Model):
-    REPO_VERSION_ITEM_TYPE_CHOICES = (
+    version = models.ForeignKey(RepoVersion, related_name='items')
+    text = models.TextField(blank=True, null=True)
+
+
+class RepoVersionItemChange(models.Model):
+    REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES = (
         ('new', 'new'),
         ('fix', 'fix'),
     )
 
-    version = models.ForeignKey(RepoVersion, related_name='items')
-    type = models.CharField(max_length=10, choices=REPO_VERSION_ITEM_TYPE_CHOICES)
+    version_item = models.ForeignKey(RepoVersionItem, related_name='changes')
+    type = models.CharField(max_length=10, choices=REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES)
     text = models.TextField()
