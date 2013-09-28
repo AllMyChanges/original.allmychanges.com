@@ -1,4 +1,5 @@
 import os
+import re
 
 
 def list_files():
@@ -37,3 +38,106 @@ def search_changelog():
     for filename in _filter_changelog_files(filenames):
         return filename
 
+
+def _extract_version(line):
+    match = re.search(r'\d+\.\d+\.\d+|\d+\.\d+', line)
+    if match is not None:
+        return match.group(0)
+
+
+def _parse_item(line):
+    """For lines like:
+
+     - Blah minor
+
+    returns tuple (True, 3, 'Blah minor')
+    for others - (False, 0, None)
+    """
+    match = re.search(r'^[ ]*[*-][ ]+', line)
+    if match is not None:
+        ident = len(match.group(0))
+        return (True, ident, line[ident:])
+    return (False, 0, None)
+
+
+def _starts_with_ident(line, ident):
+    """Returns true, if line starts with given number of spaces."""
+    if ident <= 0:
+        return False
+    match = re.search(r'^[ ]{%s}[^ ]' % ident, line)
+    return match is not None
+    
+
+
+def _parse_changelog_text(text):
+    changelog = []
+    current_version = None
+    current_section = None
+    current_item = None
+    current_ident = None
+    
+    lines = text.split('\n')
+
+    for line in lines:
+        if 'set-cookie behavior' in line or 'SESSION_REFRESH_EACH_REQUEST' in line:
+            import pdb; pdb.set_trace()  # DEBUG
+            
+        # skip lines like
+        # ===================
+        if line and line == line[0] * len(line):
+            continue
+            
+        version = _extract_version(line)
+        if version is not None:
+            # we found a possible version number, lets
+            # start collecting the changes!
+            current_version = dict(version=version, sections=[])
+            current_section = None
+            current_item = None
+            current_ident = None
+            
+            changelog.append(current_version)
+        else:
+            is_item, ident, text = _parse_item(line)
+            if is_item:
+                # wow, a new changelog item was found!
+                current_item = [text]
+                current_ident = ident
+                current_section['items'].append(current_item)
+            else:
+                if _starts_with_ident(line, current_ident) and current_item:
+                    # previous changelog item has continuation on the
+                    # next line
+                    current_item.append(line[current_ident:])
+                else:
+                    # if this is not item, then this is a note
+                    if current_version is not None:
+                        if not current_section or current_section['items']:
+                            # if there is items in the current section
+                            # and we found another plaintext part,
+                            # then start another section
+                            current_section = dict(notes=[line], items=[])
+                            current_version['sections'].append(current_section)
+                        else:
+                            # otherwise, continue note of the curent
+                            # section
+                            current_section['notes'].append(line)
+
+    return _finalize_changelog(changelog)
+
+
+def _finalize_changelog(changelog):
+    """A helper to squash notes and items."""
+    for version in changelog:
+        # squash texts
+        for section in version['sections']:
+            section['items'] = [
+                ' '.join(item).strip()
+                for item in section['items']]
+            section['notes'] = ' '.join(
+                note for note in section['notes']).strip()
+
+        # remove empty sections
+        version['sections'] = [section for section in version['sections']
+                               if section['notes'] or section['items']]
+    return changelog

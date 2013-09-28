@@ -41,3 +41,5 @@ nosetests.xml
 .stats
 .idea
 /src/
+/.noseids
+/.tdaemon.state
