@@ -23,7 +23,7 @@ def git_log_hash(path):
         for group in r.std_out.split(splitter)[:-1]:
             _hash, date, msg = group.strip().split(ins)
             lst.append((_hash.strip(), date.strip(), msg.strip()))
-        return reversed(lst)
+        return list(reversed(lst))
 
 
 def git_checkout(path, revision_hash):
@@ -49,8 +49,8 @@ def aggregate_git_log(path):
                 versions.insert(0,
                                 dict(version=version,
                                      date=datetime.strptime(date.rsplit(' ', 1)[0], '%Y-%m-%d %H:%M:%S'),
-                                     sections=dict(notes='',
-                                                   items=reversed(current_commits))))
+                                     sections=[dict(notes='',
+                                                    items=list(reversed(current_commits)))]))
 
                 current_version, current_commits = version, list()
 
@@ -58,7 +58,7 @@ def aggregate_git_log(path):
         versions.insert(0,
                         dict(version='newest',
                              date=None,
-                             sections=dict(notes='',
-                                           items=reversed(current_commits))))
+                             sections=[dict(notes='',
+                                           items=list(reversed(current_commits)))]))
 
     return versions
