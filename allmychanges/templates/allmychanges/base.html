@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="allMyChangesApp">
 <head>
     <title>AllMyChanges.com</title>
 
@@ -19,14 +19,42 @@
 
     <!-- Angular from https://developers.google.com/speed/libraries/devguide#angularjs -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-cookies.min.js"></script>
 
     <style type="text/css">
         .container {
             max-width: 970px !important;
         }
 
+        .progress-bar {
+            display: none;
+            width: 100%;
+            height: 3px;
+            border-radius: 0 0 5px 5px;
+            background: #58d68d;
+            position: fixed;
+            z-index: 1000;
+            opacity: 0.7;
+        }
+
         .headline {
-            padding: 73px 0 10px 0;
+            padding: 2.5em 0 1em 0;
+        }
+        .headline-message {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+        .headline-message-success {
+            color: #58d68d;
+        }
+        .headline-message-info {
+            color: #5dade2;
+        }
+        .headline-message-warning {
+            color: #f5d313;
+        }
+        .headline-message-danger {
+            color: #ec7063;
         }
 
         .change_container {
@@ -54,7 +82,7 @@
 
 <body>
     {% block content %}{% endblock content %}
-    <footer class="footer">
+    <footer class="footer navbar-fixed-bottom">
         <div class="container" style="padding-top: 0.5em; padding-bottom: 0.5em; text-align: center;">
             <small>
                 &copy; <a href="http://djangodash.com/teams/c4/changers/">Changers team</a>,

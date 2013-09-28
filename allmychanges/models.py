@@ -3,11 +3,45 @@ from django.db import models
 
 
 class Repo(models.Model):
-    url = models.URLField()
+    PROCESSING_STATE_CHOICES = (
+        ('in_progress', 'In progress'),
+        ('error', 'Error'),
+        ('finished', 'Finished'),
+    )
+
+    url = models.URLField(unique=True)
     title = models.CharField(max_length=255)
+
+    # processing fields
+    processing_state = models.CharField(max_length=20, choices=PROCESSING_STATE_CHOICES, null=True)
+    processing_status_message = models.CharField(max_length=255, blank=True, null=True)
+    processing_progress = models.PositiveIntegerField(default=0)
+    processing_date_started = models.DateTimeField(blank=True, null=True)
+    processing_date_finished = models.DateTimeField(blank=True, null=True)
 
     def __unicode__(self):
         return u'{url}. {title}'.format(url=self.url, title=self.title)
+
+    @classmethod
+    def start_changelog_processing_for_url(cls, url):
+        repo, is_created = Repo.objects.get_or_create(url=url)
+        repo.start_processing_if_needed()
+        return repo
+
+    def start_processing_if_needed(self):
+        if self.is_need_processing:
+            self.start_changelog_processing()
+            return True
+        else:
+            return False
+
+    def is_need_processing(self):
+        # todo: me
+        return True
+
+    def start_changelog_processing(self):
+        # todo: async job
+        pass
 
 
 class RepoVersion(models.Model):
@@ -25,6 +59,7 @@ class RepoVersionItem(models.Model):
 
     def __unicode__(self):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
+
 
 class RepoVersionItemChange(models.Model):
     REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES = (
