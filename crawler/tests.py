@@ -97,6 +97,22 @@ Bugfix release, released on June 29th 2011
          'expire if the browser window closes.'),
         parsed[0]['sections'][0]['items'][0])
 
+
+def test_preserve_newlines_in_long_notes():
+    input = """
+1.0
+-----------
+
+Some note with few paragraphs.
+Each paragraph should be separated with empty line.
+
+Like that.
+"""
+    parsed = _parse_changelog_text(input)
+    eq_("""Some note with few paragraphs. Each paragraph should be separated with empty line. 
+Like that.""", parsed[0]['sections'][0]['notes'])
+    
+
 def test_extract_version():
     eq_(None, _extract_version('Just a text with some 1 33 nubers'))
     eq_('1.0', _extract_version('Version 1.0'))
