@@ -51,6 +51,10 @@ class Repo(models.Model):
     @classmethod
     def start_changelog_processing_for_url(cls, url):
         repo, is_created = Repo.objects.get_or_create(url=url)
+        repo.requested_count += 1
+        if is_created:
+            repo.date_created = now()
+        repo.save()
         repo.start_processing_if_needed()
         return repo
 
