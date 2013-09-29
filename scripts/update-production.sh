@@ -9,7 +9,10 @@ pushd "$BASEDIR" > /dev/null
 git pull
 env/bin/pip install -r requirements.txt
 
-sudo -u www-data env/bin/python manage.py syndb --migrate
+sudo -u www-data env/bin/python manage.py syncdb --migrate
+sudo mkdir -p static
+sudo chown www-data:www-data static
+yes yes | sudo -u www-data env/bin/python manage.py collectstatic
 
 sudo cp configs/upstart.conf /etc/init/allmychanges.conf
 sudo service allmychanges restart
