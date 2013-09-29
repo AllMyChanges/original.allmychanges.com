@@ -16,11 +16,13 @@ class RepoVersionItemChangeSerializer(serializers.ModelSerializer):
 
 class RepoVersionItemSerializer(serializers.ModelSerializer):
     changes = RepoVersionItemChangeSerializer(many=True)
+    clean_text = serializers.CharField()
 
     class Meta:
         model = RepoVersionItem
         fields = (
             'text',
+            'clean_text',
             'changes',
         )
 
@@ -60,6 +62,7 @@ class RepoDetailSerializer(RepoSerializer):
             'processing_progress',
             'processing_date_started',
             'processing_date_finished',
+            'changelog_markup',
         )
 
 

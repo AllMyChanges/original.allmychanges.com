@@ -7,9 +7,11 @@ django-extensions==1.2.2
 django-rq==0.5.1
 django==1.5.4
 djangorestframework==2.3.8
+docutils==0.11
 drf-extensions==0.2
 envoy==0.0.2
 graphitesend==0.1.1
+lxml==3.2.3
 nose==1.2.1
 python-dateutil==2.1
 pytz==2013d

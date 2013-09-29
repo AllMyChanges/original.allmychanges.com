@@ -167,7 +167,7 @@
                         <ul class="list-unstyled">
                             <li ng-repeat="item in version.items">
                                 <span ng-show="!$first">&nbsp;</span>
-                                <p ng-show="item.text">{{ item.text }}</p>
+                                <p ng-show="item.clean_text">{{ item.clean_text }}</p>
                                 <table class="changes-table">
                                     <tbody>
                                         <tr ng-repeat="change in item.changes">

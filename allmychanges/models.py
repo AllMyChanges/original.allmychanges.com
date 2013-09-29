@@ -7,7 +7,14 @@ from django.utils.timezone import now
 
 from crawler import search_changelog, _parse_changelog_text
 from crawler.git_crawler import aggregate_git_log
-from allmychanges.utils import cd, get_package_metadata, download_repo, get_commit_type, get_markup_type
+from allmychanges.utils import (
+    cd,
+    get_package_metadata,
+    download_repo,
+    get_commit_type,
+    get_markup_type,
+    get_clean_text_from_markup_text,
+)
 from allmychanges.tasks import update_repo
 
 
@@ -165,6 +172,10 @@ class RepoVersionItem(models.Model):
 
     def __unicode__(self):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
+
+    @property
+    def clean_text(self):
+        return get_clean_text_from_markup_text(self.text, markup_type=self.version.repo.changelog_markup)
 
 
 class RepoVersionItemChange(models.Model):

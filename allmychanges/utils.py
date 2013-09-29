@@ -1,9 +1,12 @@
+from django.utils.encoding import force_text
 import os
 import re
 import string
 import envoy
-
+from lxml import html
 from contextlib import contextmanager
+
+from django.contrib.markup.templatetags import markup
 from django.conf import settings
 
 
@@ -120,3 +123,35 @@ def get_commit_type(commit_message):
     elif '[fix]' in commit_message:
         return 'fix'
     return 'new'
+
+
+def get_clean_text_from_html(raw_html):
+    if not raw_html:
+        return ''
+    return html.tostring(html.fromstring(force_text(raw_html)), method='text', encoding=unicode)
+
+
+def get_clean_text_from_markup_text(text, markup_type):
+    raw_html = render_text_for_markup_type(text, markup_type=markup_type)
+    return get_clean_text_from_html(raw_html)
+
+
+def render_text_for_markup_type(text, markup_type):
+    if markup_type == 'markdown':
+        return render_markdown(text)
+    elif markup_type == 'rest':
+        return render_rest(text)
+    else:
+        return text
+
+
+def render_markdown(text):
+    if text is None:
+        text = ''
+    return markup.markdown(force_text(text))
+
+
+def render_rest(text):
+    if text is None:
+        text = ''
+    return markup.restructuredtext(force_text(text))
