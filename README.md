@@ -6,7 +6,7 @@ A project for Django Dash 2013
 How to setup
 ------------
 
-    $ sudo apt-get install mysql-server redis-server python-dev libxml2-dev libxslt1-dev
+    $ sudo apt-get install mysql-server redis-server python-dev libxml2-dev libxslt1-dev logtail
     $ chmod +x scripts/create-env.sh
     $ scripts/create-env.sh
     $ source env/bin/activate
@@ -14,6 +14,10 @@ How to setup
     $ chmod +x manage.py
     $ sudo mkdir -p /var/log/allmychanges
     $ sudo chmod 777 /var/log/allmychanges
+    $ sudo mkdir -p /var/log/logster
+    $ sudo chmod 777 /var/log/logster
+    $ sudo mkdir -p /var/run/logster
+    $ sudo chmod 777 /var/log/logster
     $ ./manage.py syncdb --migrate
     $ ./manage.py runserver 0.0.0.0:8000
     $ # and in other console

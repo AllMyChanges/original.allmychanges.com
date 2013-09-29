@@ -16,11 +16,12 @@ sudo chown www-data:www-data static
 yes yes | sudo -u www-data env/bin/python manage.py collectstatic  --settings=allmychanges.settings.production
 
 sudo cp configs/upstart.conf /etc/init/allmychanges.conf
-sudo service allmychanges restart
 sudo cp configs/nginx.conf /etc/nginx/sites-enabled/allmychanges.conf
-sudo service nginx restart
-
 sudo cp configs/rqworker-upstart.conf /etc/init/allmychanges-rqworker.conf
+sudo cp configs/cron.conf /etc/cron.d/allmychanges
+
+sudo service allmychanges restart
+sudo service nginx restart
 sudo service allmychanges-rqworker restart
 
 mkdir -p data

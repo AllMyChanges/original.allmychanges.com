@@ -4,6 +4,7 @@ import string
 import envoy
 import logging
 import graphitesend
+import time
 
 from lxml import html
 from contextlib import contextmanager
@@ -170,3 +171,19 @@ def graphite_send(**kwargs):
         g.send_dict(kwargs)
     except Exception:
         logging.getLogger('django').exception('Graphite is down')
+
+def count(metric_key, value=1):
+    """Log some metrics to process with logster and graphite."""
+    logging.getLogger('stats').info('METRIC_COUNT metric={metric} value={value}'.format(
+            metric=metric_key, value=value))
+
+@contextmanager
+def count_time(metric_key):
+    """Log some timings to process with logster and graphite."""
+    start = time.time()
+    try:
+        yield
+    finally:
+        value = time.time() - start
+        logging.getLogger('stats').info('METRIC_TIME metric={metric} value={value}s'.format(
+                metric=metric_key, value=value))
