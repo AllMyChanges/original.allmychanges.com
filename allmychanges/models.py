@@ -137,7 +137,7 @@ class Repo(models.Model):
             self.save()
 
             for change in changes:
-                version = self.versions.create(name=change['version'])
+                version = self.versions.create(name=change['version'] or 'unrecognized')
                 for section in change['sections']:
 
                     item = version.items.create(text=section['notes'])
@@ -174,7 +174,7 @@ class RepoVersionItem(models.Model):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
 
     @property
-    def clean_text(self):
+    def text_clean(self):
         return get_clean_text_from_markup_text(self.text, markup_type=self.version.repo.changelog_markup)
 
 
