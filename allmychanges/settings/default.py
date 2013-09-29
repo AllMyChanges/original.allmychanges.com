@@ -6,7 +6,7 @@ root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
 _current_user = os.environ.get('USER', os.environ.get('LOGNAME', 'root'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
