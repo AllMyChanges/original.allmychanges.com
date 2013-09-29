@@ -168,6 +168,7 @@ def test_get_markup_type():
     eq_('markdown', get_markup_type('readme.txt.md'))
     eq_('markdown', get_markup_type('readme.markdown'))
     eq_('markdown', get_markup_type('readme.MARKDOWN'))
+    eq_('markdown', get_markup_type('readme.mdown'))
 
     eq_('rest', get_markup_type('README.RST'))
     eq_('rest', get_markup_type('README.rst'))
