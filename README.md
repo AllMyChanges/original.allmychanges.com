@@ -23,3 +23,11 @@ Maybe you need to create mysql database before `./manage.py syncdb --migrate`. R
 
     mysql> CREATE DATABASE allmychanges CHARACTER SET utf8 COLLATE utf8_unicode_ci;
     mysql> GRANT ALL ON allmychanges.* TO `allmychanges`@`localhost` IDENTIFIED BY 'allmychanges';
+
+In production you will need additional steps like:
+
+   $ sudo mkdir -p /var/www/.ssh
+   $ sudo chown www-data:www-data /var/www/.ssh
+   $ sudo -u www-data ssh-keygen
+   $ cat /var/www/.ssh/id_rsa.pub
+   $ echo "Now create a new GitHub account and put this ssh key there."

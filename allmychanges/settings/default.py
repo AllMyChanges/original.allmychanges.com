@@ -6,7 +6,7 @@ root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
 _current_user = os.environ.get('USER', os.environ.get('LOGNAME', 'root'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -18,7 +18,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'allmychanges',                      # Or path to database file if using sqlite3.
+        'NAME': 'allmychanges_fantom',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'allmychanges',
         'PASSWORD': 'allmychanges',
@@ -164,13 +164,13 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.handlers.WatchedFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/allmychanges/django.log'
+            'filename': '/var/log/allmychanges/django-{0}.log'.format(_current_user)
         },
         'workers_catchall': {
             'level': 'ERROR',
             'class': 'logging.handlers.WatchedFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/allmychanges/workers.log'
+            'filename': '/var/log/allmychanges/workers-{0}.log'.format(_current_user)
         },
     },
     'loggers': {

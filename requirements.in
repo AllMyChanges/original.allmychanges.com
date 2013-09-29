@@ -11,7 +11,9 @@ nose>=1.2,<1.3
 rq
 django-rq
 docutils
+markdown
 lxml
+gunicorn
 
 -e git+git://github.com/svetlyak40wt/pip-tools.git@my-future
 -e git+git://github.com/svetlyak40wt/nose-notify-tmux.git

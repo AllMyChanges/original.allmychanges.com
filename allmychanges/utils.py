@@ -97,10 +97,13 @@ def download_repo(url, pull_if_exists=True):
 def get_markup_type(filename):
     """Return markdown or rest or None"""
     extension = filename.rsplit('.', 1)[-1].lower()
-    if extension == 'md' or extension == 'markdown':
-        return 'markdown'
-    elif extension == 'rst' or extension == 'rest':
-        return 'rest'
+    mapping = dict(
+        markdown={'md', 'markdown', 'mdown'},
+        rest={'rst', 'rest'},
+    )
+    for markup, possible_extensions in mapping.items():
+        if extension in possible_extensions:
+            return markup
 
 
 def get_commit_type(commit_message):

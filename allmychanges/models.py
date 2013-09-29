@@ -26,6 +26,7 @@ MARKUP_CHOICES = (
 
 class Repo(models.Model):
     PROCESSING_STATE_CHOICES = (
+        ('ready_for_job', 'Ready for job'),
         ('in_progress', 'In progress'),
         ('error', 'Error'),
         ('finished', 'Finished'),
@@ -62,7 +63,9 @@ class Repo(models.Model):
 
     @property
     def is_need_processing(self):
-        if not self.processing_date_started:
+        if self.processing_state == 'ready_for_job':
+            return True
+        elif not self.processing_date_started:
             return True
         elif self.is_processing_started_more_than_minutes_ago(30):
             return True
@@ -77,6 +80,10 @@ class Repo(models.Model):
         return now() > self.processing_date_started + datetime.timedelta(minutes=minutes)
 
     def start_changelog_processing(self):
+        self.processing_state = 'ready_for_job'
+        self.processing_status_message = 'Ready for job'
+        self.processing_progress = 10
+        self.save()
         update_repo.delay(self.id)
 
     def _update(self):
@@ -144,7 +151,8 @@ class Repo(models.Model):
             self.save()
 
             for change in changes:
-                version = self.versions.create(name=change['version'] or 'unrecognized')
+                version = self.versions.create(name=change['version'] or 'unrecognized',
+                                               date=change.get('date'),)
                 for section in change['sections']:
 
                     item = version.items.create(
