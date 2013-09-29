@@ -1,3 +1,4 @@
+-e git+git://github.com/svetlyak40wt/logster.git@e69ae03e920605ae2d6b61d06836f12530cce6b8#egg=logster
 -e git+git://github.com/svetlyak40wt/nose-notify-tmux.git@1c5fbe474a9b5b279460c5d1ee7928faca6e0160#egg=nose-notify-tmux
 -e git+git://github.com/svetlyak40wt/pip-tools.git@49e94cd8531db0cfed681ce2524e6e50d07dd1d9#egg=pip-tools
 -e git+git://github.com/svetlyak40wt/tdaemon.git@0c6eaaa39aec5dd8c51366476acba3d8aff0d78d#egg=tdaemon
