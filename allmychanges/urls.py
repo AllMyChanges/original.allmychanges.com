@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^v1/', include('allmychanges.urls_api')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^favicon.ico/$', lambda x: redirect('/static/favicon.ico')),
+    url(r'^django-rq/', include('django_rq.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
