@@ -20,6 +20,7 @@ class RepoAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'requested_count')
     date_hierarchy = 'date_created'
     inlines = (RepoVersionInlines,)
+    search_fields = ('url', 'title')
 
 
 class RepoVersionAdmin(admin.ModelAdmin):
