@@ -11,6 +11,7 @@ docutils==0.11
 drf-extensions==0.2
 envoy==0.0.2
 graphitesend==0.1.1
+gunicorn==18.0
 lxml==3.2.3
 nose==1.2.1
 python-dateutil==2.1
