@@ -1,9 +1,9 @@
 0.2.0 (unreleased)
 ==================
 
-This app just a prototype of the idea, simple but already useful. We
+This app is just a prototype of the idea, simple but already useful. We
 already have ideas how to evolve this project into something even more
-useful. Here are directions.
+useful. Here are some directions.
 
  - We will add a service for authenticated users, to allow them to
    collect packages they are interested in. Then we will send a
@@ -11,7 +11,7 @@ useful. Here are directions.
  - We definitely should make a richer API, to make some useful projects
    born. One of them could be a command line tool to gather new
    changes in modules, pinned in requirements.txt
- - And of cause, we are planning to broaden service's possibilities,
+ - And of course, we are planning to broaden service's possibilities,
    expanding to other platforms and languages.
 
 Stay tuned, subscribe to our news-letter or twitter (http://twitter.com/allmychanges)
@@ -26,7 +26,7 @@ libraries. All information is gathered and presented in one format.
 There are at least two possibilities to collect changelog data.
 
 Firstly, allmychanges.com tries to find a plaintext file with
-handwriten changelog. If it was found, we parse put to the cache.
+handwriten changelog. If it was found, we parse it and put to cache.
 
 If there is no handwritten changelog, our robot applies all
 his intelligence, to extract library's versions from VCS history and

@@ -66,12 +66,6 @@
                             $scope.current_repo.id
                         );
                     }, 1000);
-                }else{
-                    if ($scope.current_repo.processing_state == 'finished') {
-                        $timeout(function(){
-                            $scope.message = {};
-                        }, 3000);
-                    }
                 }
             });
         };
@@ -94,7 +88,7 @@
             $scope.message.text = text;
         };
 
-        var initial_url = 'https://github.com/kennethreitz/requests';
+        var initial_url = 'https://github.com/AllMyChanges/allmychanges.com';
         if (angular.isString($location.search()['url'])) {
             initial_url = $location.search()['url'];
         }
@@ -167,7 +161,7 @@
                         <ul class="list-unstyled">
                             <li ng-repeat="item in version.items">
                                 <span ng-show="!$first">&nbsp;</span>
-                                <p ng-show="item.text_clean" ng-bind="item.text_clean"></p>
+                                <p ng-show="item.text" ng-bind="item.text"></p>
                                 <table class="changes-table">
                                     <tbody>
                                         <tr ng-repeat="change in item.changes">
@@ -181,7 +175,7 @@
                                                     <b>{{ change.type | uppercase }}</b>
                                                 </div>
                                             </td>
-                                            <td ng-bind="change.text_clean"></td>
+                                            <td ng-bind="change.text"></td>
                                         </tr>
                                     </tbody>
                                 </table>
