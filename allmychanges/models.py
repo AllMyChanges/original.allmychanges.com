@@ -105,7 +105,7 @@ class Repo(models.Model):
             if path:
                 with cd(path):
                     self.processing_status_message = 'Searching changes'
-                    self.processing_progress = 55
+                    self.processing_progress = 50
                     self.save()
                     changelog_filename = search_changelog()
                     if changelog_filename:
@@ -130,7 +130,14 @@ class Repo(models.Model):
             raise
 
     def _update_from_git_log(self, path):
-        changes = aggregate_git_log(path)
+        progress = self.processing_progress
+        progress_on_this_step = 30
+        
+        def progress_callback(git_progress):
+            self.processing_progress = progress + progress_on_this_step * git_progress
+            self.save()
+        
+        changes = aggregate_git_log(path, progress_callback)
         if changes:
             self._update_from_changes(changes)
 
@@ -152,7 +159,7 @@ class Repo(models.Model):
         if changes:
             self.versions.all().delete()
             self.processing_status_message = 'Updating database'
-            self.processing_progress = 70
+            self.processing_progress = 80
             self.save()
 
             for change in changes:

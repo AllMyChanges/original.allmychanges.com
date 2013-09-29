@@ -8,11 +8,12 @@ pushd "$BASEDIR" > /dev/null
 
 git pull
 env/bin/pip install -r requirements.txt
+env/bin/pip install -e .
 
-sudo -u www-data env/bin/python manage.py syncdb --migrate
+sudo -u www-data env/bin/python manage.py syncdb --migrate --settings=allmychanges.settings.production
 sudo mkdir -p static
 sudo chown www-data:www-data static
-yes yes | sudo -u www-data env/bin/python manage.py collectstatic
+yes yes | sudo -u www-data env/bin/python manage.py collectstatic  --settings=allmychanges.settings.production
 
 sudo cp configs/upstart.conf /etc/init/allmychanges.conf
 sudo service allmychanges restart
