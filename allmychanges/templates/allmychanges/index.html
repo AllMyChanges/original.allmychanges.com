@@ -151,12 +151,12 @@
                 </h6>
                 <div>
                     <div ng-repeat="version in current_repo.versions" class="change_container">
-                        <div style="margin-bottom: 1em">
-                            <span style="font-weight: bold; font-size: 1.3em; " ng-cloak>Version {{ version.name }}</span>
+                        <div style="margin-bottom: 1em; font-size: 1.3em;">
+                            <span style="font-weight: bold;" ng-cloak>Version {{ version.name }}</span>
                             <span ng-show="version.date"
                                   class="note"
-                                  style="font-size: 13px;">
-                                &nbsp;{{ version.date }}
+                                  ng-cloak>
+                                &nbsp;({{ version.date }})
                             </span>
                         </div>
                         <ul class="list-unstyled">
