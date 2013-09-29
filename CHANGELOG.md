@@ -22,12 +22,10 @@ to receive news and ealier inventations to betas.
 
 This app provides an easy way to collect changelogs of different
 libraries. All information is gathered and presented in one format.
-
 There are at least two possibilities to collect changelog data.
 
 Firstly, allmychanges.com tries to find a plaintext file with
 handwriten changelog. If it was found, we parse it and put to cache.
-
 If there is no handwritten changelog, our robot applies all
 his intelligence, to extract library's versions from VCS history and
 tie each commit message to particular version. This is not very
