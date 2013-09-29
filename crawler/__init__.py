@@ -41,9 +41,14 @@ def search_changelog():
 
 
 def _extract_version(line):
-    match = re.search(r'^[^ ].*?(\d+\.\d+\.\d+|\d+\.\d+)', line)
-    if match is not None:
-        return match.group(1)
+    extract_regexps = [
+        r'^(\d+\.\d+\.\d+|\d+\.\d+).*',
+        r'^[^ ].*?(\d+\.\d+\.\d+|\d+\.\d+)',
+    ]
+    for i in extract_regexps:
+        match = re.search(i, line)
+        if match is not None:
+            return match.group(1)
 
 
 def _parse_item(line):

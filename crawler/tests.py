@@ -97,6 +97,7 @@ def test_extract_version():
     eq_(None, _extract_version('Just a text with some 1 33 nubers'))
     eq_('1.0', _extract_version('Version 1.0'))
     eq_('0.10.2', _extract_version('Version 0.10.2'))
+    eq_('2.0.0', _extract_version('2.0.0 (2013-09-24)'))
     eq_(None, _extract_version('  some number in the item\'s text 0.1'))
 
 
