@@ -1,5 +1,10 @@
 import os
 import re
+from dateutil.parser import parse as date_parser
+
+
+#RE_DATE = re.compile(r'(.*\s|\s?|.*\()(?P<date>\d{1,4}[.-]+\d{1,4}[.-]+\d{1,4})')
+RE_DATE = re.compile(r'(?P<date>\d{1,4}[.-]+\d{1,4}[.-]+\d{1,4})')
 
 
 def list_files():
@@ -51,6 +56,15 @@ def _extract_version(line):
             return match.group(1)
 
 
+def _extract_date(line):
+    """Return date that is in line"""
+    for date_str in RE_DATE.finditer(line):
+        try:
+            return date_parser(date_str.group('date')).date()
+        except:
+            continue
+
+
 def _parse_item(line):
     """For lines like:
 
@@ -72,7 +86,6 @@ def _starts_with_ident(line, ident):
         return False
     match = re.search(r'^[ ]{%s}[^ ]' % ident, line)
     return match is not None
-
 
 
 def _parse_changelog_text(text):
@@ -98,7 +111,9 @@ def _parse_changelog_text(text):
             current_section['items'].append(current_item)
         else:
             version = _extract_version(line)
+            v_date = _extract_date(line)
             if version is not None:
+                print '!!!!', line, v_date
                 # we found a possible version number, lets
                 # start collecting the changes!
                 current_version = dict(version=version, sections=[])
@@ -125,6 +140,9 @@ def _parse_changelog_text(text):
                         # otherwise, continue note of the curent
                         # section
                         current_section['notes'].append(line)
+
+            if v_date and current_version.get('date') is None:
+                current_version['date'] = v_date
 
     return _finalize_changelog(changelog)
 
