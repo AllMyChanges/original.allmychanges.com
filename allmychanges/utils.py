@@ -72,7 +72,7 @@ def download_repo(url, pull_if_exists=True):
                 if response.status_code != 0:
                     raise RuntimeError('Bad status_code from git checkout master: {0}. Git\'s stderr: {1}'.format(
                             response.status_code, response.std_err))
-                
+
                 response = envoy.run('git pull')
                 if response.status_code != 0:
                     raise RuntimeError('Bad status_code from git pull: {0}. Git\'s stderr: {1}'.format(
@@ -94,9 +94,9 @@ def download_repo(url, pull_if_exists=True):
 def get_markup_type(filename):
     """Return markdown or rest or None"""
     extension = filename.rsplit('.', 1)[-1].lower()
-    if extension == 'md':
+    if extension == 'md' or extension == 'markdown':
         return 'markdown'
-    elif extension == 'rst':
+    elif extension == 'rst' or extension == 'rest':
         return 'rest'
 
 
@@ -107,10 +107,16 @@ def get_commit_type(commit_message):
         return 'new'
     elif commit_message.startswith('new '):
         return 'new'
+    elif '[new]' in commit_message:
+        return 'new'
     elif commit_message.startswith('fix'):
+        return 'fix'
+    elif ' fixes' in commit_message:
         return 'fix'
     elif ' fixed' in commit_message:
         return 'fix'
     elif 'bugfix' in commit_message:
+        return 'fix'
+    elif '[fix]' in commit_message:
         return 'fix'
     return 'new'
