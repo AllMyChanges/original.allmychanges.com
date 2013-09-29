@@ -92,7 +92,7 @@ def _parse_changelog_text(text):
             
 
         is_item, ident, text = _parse_item(line)
-        if is_item:
+        if is_item and current_section:
             # wow, a new changelog item was found!
             current_item = [text]
             current_ident = ident
