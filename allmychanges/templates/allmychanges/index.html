@@ -3,7 +3,7 @@
 
 {% block extra_head %}
 <script type="text/javascript">
-    angular.module('allMyChangesApp', ['ngCookies']);
+    angular.module('allMyChangesApp', ['ngCookies', 'ngSanitize']);
 
     function MainCtrl($scope, $cookies, $http, $timeout, $location) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
@@ -16,6 +16,10 @@
         $scope.subscription_finished = false;
 
         $scope.examples = [
+            {
+                'title': 'allmychanges.com',
+                'url': 'https://github.com/AllMyChanges/allmychanges.com'
+            },
             {
                 'title': 'Requests',
                 'url': 'https://github.com/kennethreitz/requests'
@@ -214,7 +218,7 @@
                         <ul class="list-unstyled">
                             <li ng-repeat="item in version.items">
                                 <span ng-show="!$first">&nbsp;</span>
-                                <p ng-show="item.text" ng-bind="item.text"></p>
+                                <p ng-show="item.text_clean" ng-bind-html="item.text_clean"></p>
                                 <table class="changes-table">
                                     <tbody>
                                         <tr ng-repeat="change in item.changes">

@@ -10,3 +10,8 @@ class IndexView(TemplateView):
         result = super(IndexView, self).get_context_data(**kwargs)
         result['settings'] = settings
         return result
+
+
+class HumansView(TemplateView):
+    template_name = 'allmychanges/humans.txt'
+    content_type = 'text/plain'

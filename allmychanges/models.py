@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.template.defaultfilters import linebreaksbr
 import os
 import datetime
 
@@ -203,6 +204,10 @@ class RepoVersionItem(models.Model):
 
     def __unicode__(self):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
+
+    @property
+    def text_clean(self):
+        return linebreaksbr(self.text)
 
 
 class RepoVersionItemChange(models.Model):

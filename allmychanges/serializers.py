@@ -16,11 +16,13 @@ class RepoVersionItemChangeSerializer(serializers.ModelSerializer):
 
 class RepoVersionItemSerializer(serializers.ModelSerializer):
     changes = RepoVersionItemChangeSerializer(many=True)
+    text_clean = serializers.CharField()
 
     class Meta:
         model = RepoVersionItem
         fields = (
             'text',
+            'text_clean',
             'changes',
         )
 
