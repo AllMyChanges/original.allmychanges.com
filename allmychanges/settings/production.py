@@ -17,3 +17,5 @@ RQ_QUEUES = {
 }
 
 ALLOWED_HOSTS = ['allmychanges.com']
+
+SHOW_METRIKA = True
