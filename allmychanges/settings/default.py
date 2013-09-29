@@ -205,4 +205,6 @@ RQ_QUEUES = {
    },
 }
 
+GRAPHITE_PREFIX = 'allmychanges.' + _current_user
+
 from secure_settings import *

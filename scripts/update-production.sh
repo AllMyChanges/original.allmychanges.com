@@ -25,3 +25,5 @@ sudo service allmychanges-rqworker restart
 
 mkdir -p data
 sudo chown -R www-data:www-data data
+
+sudo -u www-data env/bin/python manage.py after_release --settings=allmychanges.settings.production

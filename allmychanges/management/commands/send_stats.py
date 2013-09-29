@@ -18,8 +18,7 @@ class Command(BaseCommand):
     help = u"""Send stats to graphite Graphite."""
 
     def handle(self, *args, **options):
-        prefix = 'allmychanges.'
         stats = get_stats()
-        g = graphitesend.init(prefix=prefix,
+        g = graphitesend.init(prefix=settings.GRAPHITE_PREFIX + '.',
                               graphite_server=settings.GRAPHITE_HOST)
         g.send_dict(stats)

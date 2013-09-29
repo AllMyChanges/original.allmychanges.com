@@ -20,6 +20,8 @@ DATABASES['default'].update({
     'NAME': 'allmychanges',
 })
 
+GRAPHITE_PREFIX = 'allmychanges'
+
 ALLOWED_HOSTS = ['allmychanges.com']
 
 SHOW_METRIKA = True
