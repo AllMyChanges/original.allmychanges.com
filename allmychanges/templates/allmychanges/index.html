@@ -168,21 +168,25 @@
                             <li ng-repeat="item in version.items">
                                 <span ng-show="!$first">&nbsp;</span>
                                 <p ng-show="item.text">{{ item.text }}</p>
-                                <div class="row" ng-repeat="change in item.changes" style="padding-bottom: 0.5em;">
-                                    <div class="col-md-1">
-                                        <div class="label"
-                                              ng-class="{
-                                                  'label-info': change.type == 'new',
-                                                  'label-success': change.type == 'fix'
-                                              }"
-                                              style="width: 100%; display: block">
-                                            <b>{{ change.type | uppercase }}</b>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-11" style="padding-left: 0px; padding-top: 0.1em;">
-                                        {{ change.text }}
-                                    </div>
-                                </div>
+                                <table class="changes-table">
+                                    <tbody>
+                                        <tr ng-repeat="change in item.changes">
+                                            <td>
+                                                <div class="label"
+                                                      ng-class="{
+                                                          'label-info': change.type == 'new',
+                                                          'label-success': change.type == 'fix'
+                                                      }"
+                                                      style="width: 100%; display: block">
+                                                    <b>{{ change.type | uppercase }}</b>
+                                                </div>
+                                            </td>
+                                            <td >
+                                                {{ change.text }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </li>
                         </ul>
                     </div>
