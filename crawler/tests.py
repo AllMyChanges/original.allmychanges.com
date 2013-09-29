@@ -1,6 +1,9 @@
+from datetime import date
 from nose.tools import eq_
+
 from . import (_filter_changelog_files, _parse_changelog_text,
-               _extract_version, _starts_with_ident, _parse_item)
+               _extract_version, _starts_with_ident, _parse_item,
+               _extract_date,)
 from allmychanges.utils import transform_url, get_markup_type, get_commit_type
 
 
@@ -44,7 +47,7 @@ Flask Changelog
 
 Here you can see the full list of changes between each Flask release.
 
-Version 1.0
+Version 1.0 (23-12-2013)
 -----------
 
 (release date to be announced, codename to be selected)
@@ -77,6 +80,7 @@ Bugfix release, released on June 29th 2011
     parsed = _parse_changelog_text(input)
     eq_(3, len(parsed))
     eq_('1.0', parsed[0]['version'])
+    eq_(date(2013, 12, 23), parsed[0]['date'])
     eq_('0.10.2', parsed[1]['version'])
     eq_('0.7.1', parsed[2]['version'])
 
@@ -108,6 +112,33 @@ def test_parse_item():
     eq_((True, 3, 'Blah minor'), _parse_item(' - Blah minor'))
     eq_((True, 5, 'Blah minor'), _parse_item('  -  Blah minor'))
     eq_((True, 5, 'Blah minor'), _parse_item('  *  Blah minor'))
+
+
+def test_extract_date():
+    eq_(None, _extract_date(''))
+    eq_(None, _extract_date('ejwkjw kjjwk 20'))
+    eq_(None, _extract_date('2009 thouth 15 fne 04'))
+    eq_(None, _extract_date('11'))
+    eq_(None, _extract_date('12.2009'))
+
+    eq_(date(2009, 5, 23), _extract_date('2009-05-23'))
+    eq_(date(2009, 5, 23), _extract_date('2009-5-23'))
+    eq_(date(2009, 5, 3), _extract_date('2009-05-03'))
+    eq_(date(2009, 5, 23), _extract_date('05-23-2009'))
+    eq_(date(2009, 5, 23), _extract_date('05.23.2009'))
+    eq_(date(2009, 5, 23), _extract_date('23.05.2009'))
+
+    d = _extract_date('23.05.2009')
+    print '!!!', type(d)
+
+    eq_(date(2009, 5, 23), _extract_date('(2009-05-23)'))
+    eq_(date(2009, 5, 23), _extract_date('v 1.0.0 (2009-05-23)'))
+    eq_(date(2009, 5, 23), _extract_date('in a far far 2009-05-23 there were star wars'))
+    eq_(date(2009, 5, 23), _extract_date('in a far far 23-05-2009 there were star wars'))
+    eq_(date(2009, 5, 23), _extract_date('in a far far 23.05.2009 there were star wars'))
+
+    # could confuse day and month
+    eq_(date(2009, 4, 5), _extract_date('04.05.2009'))
 
 
 def test_starts_with_ident():
