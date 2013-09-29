@@ -1,9 +1,8 @@
-import graphitesend
 import os
-
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from allmychanges.utils import graphite_send
 
 
 def get_stats():
@@ -19,6 +18,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         stats = get_stats()
-        g = graphitesend.init(prefix=settings.GRAPHITE_PREFIX + '.',
-                              graphite_server=settings.GRAPHITE_HOST)
-        g.send_dict(stats)
+        graphite_send(**stats)

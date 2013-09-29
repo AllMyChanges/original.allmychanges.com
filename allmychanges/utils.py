@@ -1,13 +1,16 @@
-from django.utils.encoding import force_text
 import os
 import re
 import string
 import envoy
+import logging
+import graphitesend
+
 from lxml import html
 from contextlib import contextmanager
 
 from django.contrib.markup.templatetags import markup
 from django.conf import settings
+from django.utils.encoding import force_text
 
 
 def load_data(filename):
@@ -158,3 +161,12 @@ def render_rest(text):
     if text is None:
         text = ''
     return markup.restructuredtext(force_text(text))
+
+
+def graphite_send(**kwargs):
+    try:
+        g = graphitesend.init(prefix=settings.GRAPHITE_PREFIX + '.',
+                              graphite_server=settings.GRAPHITE_HOST)
+        g.send_dict(kwargs)
+    except Exception:
+        logging.getLogger('django').exception('Graphite is down')
