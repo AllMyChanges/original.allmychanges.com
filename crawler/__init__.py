@@ -72,7 +72,7 @@ def _starts_with_ident(line, ident):
         return False
     match = re.search(r'^[ ]{%s}[^ ]' % ident, line)
     return match is not None
-    
+
 
 
 def _parse_changelog_text(text):
@@ -81,7 +81,7 @@ def _parse_changelog_text(text):
     current_section = None
     current_item = None
     current_ident = None
-    
+
     lines = text.split('\n')
 
     for line in lines:
@@ -89,7 +89,6 @@ def _parse_changelog_text(text):
         # ===================
         if line and line == line[0] * len(line):
             continue
-            
 
         is_item, ident, text = _parse_item(line)
         if is_item and current_section:
@@ -108,7 +107,7 @@ def _parse_changelog_text(text):
                 current_ident = None
 
                 changelog.append(current_version)
-                
+
             elif _starts_with_ident(line, current_ident) and current_item:
                 # previous changelog item has continuation on the
                 # next line
@@ -132,6 +131,8 @@ def _parse_changelog_text(text):
 
 def _finalize_changelog(changelog):
     """A helper to squash notes and items."""
+    dct_versions = dict()
+    result = list()
     for version in changelog:
         # squash texts
         for section in version['sections']:
@@ -144,4 +145,13 @@ def _finalize_changelog(changelog):
         # remove empty sections
         version['sections'] = [section for section in version['sections']
                                if section['notes'] or section['items']]
-    return changelog
+
+        version_data = dct_versions.get(version['version'])
+        if version_data:
+            # add current params to already existed
+            version_data['sections'].extend(version['sections'])
+        else:
+            dct_versions[version['version']] = version
+            result.append(version)
+
+    return result

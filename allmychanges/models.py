@@ -101,6 +101,11 @@ class Repo(models.Model):
                         self._update_from_filename(full_filename)
                     else:
                         self._update_from_git_log(path)
+            else:
+                self.processing_state = 'error'
+                self.processing_status_message = 'Could not download repository'
+                self.processing_date_finished = now()
+                self.save()
 
         except Exception as e:
             self.processing_state = 'error'
