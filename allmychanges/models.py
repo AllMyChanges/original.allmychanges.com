@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import linebreaksbr, urlize
 import os
 import datetime
 
@@ -200,7 +200,7 @@ class RepoVersionItem(models.Model):
 
     @property
     def text_clean(self):
-        return linebreaksbr(self.text)
+        return '<p>%s</p>' % linebreaksbr(urlize(self.text)).replace('<br />', '</p><p>')
 
 
 class RepoVersionItemChange(models.Model):
