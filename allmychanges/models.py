@@ -145,9 +145,14 @@ class Repo(models.Model):
                 version = self.versions.create(name=change['version'] or 'unrecognized')
                 for section in change['sections']:
 
-                    item = version.items.create(text=section['notes'])
+                    item = version.items.create(
+                        text=get_clean_text_from_markup_text(section['notes'], markup_type=self.changelog_markup)
+                    )
                     for section_item in section['items']:
-                        item.changes.create(type=get_commit_type(section_item), text=section_item)
+                        item.changes.create(
+                            type=get_commit_type(section_item),
+                            text=get_clean_text_from_markup_text(section_item, markup_type=self.changelog_markup)
+                        )
 
                         self.processing_state = 'finished'
                         self.processing_status_message = 'Done'
@@ -178,10 +183,6 @@ class RepoVersionItem(models.Model):
     def __unicode__(self):
         return u'Version item of {version_unicode}'.format(version_unicode=self.version.__unicode__())
 
-    @property
-    def text_clean(self):
-        return get_clean_text_from_markup_text(self.text, markup_type=self.version.repo.changelog_markup)
-
 
 class RepoVersionItemChange(models.Model):
     REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES = (
@@ -192,7 +193,3 @@ class RepoVersionItemChange(models.Model):
     version_item = models.ForeignKey(RepoVersionItem, related_name='changes')
     type = models.CharField(max_length=10, choices=REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES)
     text = models.TextField()
-
-    @property
-    def text_clean(self):
-        return get_clean_text_from_markup_text(self.text, markup_type=self.version_item.version.repo.changelog_markup)

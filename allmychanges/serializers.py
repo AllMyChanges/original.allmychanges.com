@@ -6,26 +6,21 @@ from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionI
 
 
 class RepoVersionItemChangeSerializer(serializers.ModelSerializer):
-    text_clean = serializers.CharField()
-
     class Meta:
         model = RepoVersionItemChange
         fields = (
             'type',
             'text',
-            'text_clean',
         )
 
 
 class RepoVersionItemSerializer(serializers.ModelSerializer):
     changes = RepoVersionItemChangeSerializer(many=True)
-    text_clean = serializers.CharField()
 
     class Meta:
         model = RepoVersionItem
         fields = (
             'text',
-            'text_clean',
             'changes',
         )
 
