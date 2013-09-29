@@ -164,13 +164,13 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.handlers.WatchedFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/allmychanges/django.log'
+            'filename': '/var/log/allmychanges/django-{0}.log'.format(_current_user)
         },
         'workers_catchall': {
             'level': 'ERROR',
             'class': 'logging.handlers.WatchedFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/allmychanges/workers.log'
+            'filename': '/var/log/allmychanges/workers-{0}.log'.format(_current_user)
         },
     },
     'loggers': {
