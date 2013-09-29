@@ -127,9 +127,7 @@ def test_extract_date():
     eq_(date(2009, 5, 23), _extract_date('05-23-2009'))
     eq_(date(2009, 5, 23), _extract_date('05.23.2009'))
     eq_(date(2009, 5, 23), _extract_date('23.05.2009'))
-
-    d = _extract_date('23.05.2009')
-    print '!!!', type(d)
+    #eq_(date(2013, 3, 31), _extract_date('1.2.0 (2013-03-31)'))
 
     eq_(date(2009, 5, 23), _extract_date('(2009-05-23)'))
     eq_(date(2009, 5, 23), _extract_date('v 1.0.0 (2009-05-23)'))

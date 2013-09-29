@@ -111,9 +111,8 @@ def _parse_changelog_text(text):
             current_section['items'].append(current_item)
         else:
             version = _extract_version(line)
-            v_date = _extract_date(line)
+            v_date = _extract_date(line.replace(version, '') if version else line)
             if version is not None:
-                print '!!!!', line, v_date
                 # we found a possible version number, lets
                 # start collecting the changes!
                 current_version = dict(version=version, sections=[])
