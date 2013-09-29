@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from django.utils.timezone import now
 
 from rest_framework import viewsets, mixins
@@ -18,6 +20,7 @@ from allmychanges.serializers import (
 
 class HandleExceptionMixin(object):
     def handle_exception(self, exc):
+        logging.getLogger('stats').info('api-exception')
         if isinstance(exc, ParseError):
             return Response(data={u'error_messages': exc.detail}, status=400, exception=exc)
         return super(HandleExceptionMixin, self).handle_exception(exc=exc)
@@ -31,8 +34,10 @@ class RepoViewSet(HandleExceptionMixin, DetailSerializerMixin, viewsets.ReadOnly
 
     @action(is_for_list=True, endpoint='create-changelog')
     def create_changelog(self, request, *args, **kwargs):
+
         serializer = CreateChangelogSerializer(data=request.DATA)
         if serializer.is_valid():
+            logging.getLogger('stats').info('api-create-changelog')
             repo = Repo.start_changelog_processing_for_url(url=serializer.data['url'])
             return Response(data={'id': repo.id})
         else:
@@ -45,4 +50,5 @@ class SubscriptionViewSet(HandleExceptionMixin, mixins.CreateModelMixin, viewset
 
     def create(self, request, *args, **kwargs):
         request.DATA['date_created'] = now()
+        logging.getLogger('stats').info('api-create-subscription')
         return super(SubscriptionViewSet, self).create(request, *args, **kwargs)

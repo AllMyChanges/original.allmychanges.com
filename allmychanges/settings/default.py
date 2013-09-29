@@ -172,6 +172,12 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': '/var/log/allmychanges/workers-{0}.log'.format(_current_user)
         },
+        'stats': {
+            'level': 'INFO',
+            'class': 'logging.handlers.WatchedFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/allmychanges/stats-{0}.log'.format(_current_user)
+        },
     },
     'loggers': {
         'django.request': {
@@ -183,6 +189,11 @@ LOGGING = {
             'handlers': ['workers_catchall', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'stats': {
+            'handlers': ['stats'],
+            'level': 'INFO',
+            'propagate': False,
         },
     }
 }
