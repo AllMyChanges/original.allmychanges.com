@@ -66,12 +66,6 @@
                             $scope.current_repo.id
                         );
                     }, 1000);
-                }else{
-                    if ($scope.current_repo.processing_state == 'finished') {
-                        $timeout(function(){
-                            $scope.message = {};
-                        }, 3000);
-                    }
                 }
             });
         };
@@ -94,7 +88,7 @@
             $scope.message.text = text;
         };
 
-        var initial_url = 'https://github.com/kennethreitz/requests';
+        var initial_url = 'https://github.com/AllMyChanges/allmychanges.com';
         if (angular.isString($location.search()['url'])) {
             initial_url = $location.search()['url'];
         }
