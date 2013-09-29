@@ -150,14 +150,20 @@ def _finalize_changelog(changelog):
     """A helper to squash notes and items."""
     dct_versions = dict()
     result = list()
+
+    # either add a space at the end, nor replace with
+    # \n if empty
+    process_note_line = lambda text: text + ' ' if text else '\n'
+            
     for version in changelog:
         # squash texts
         for section in version['sections']:
             section['items'] = [
                 ' '.join(item).strip()
                 for item in section['items']]
-            section['notes'] = ' '.join(
-                note for note in section['notes']).strip()
+            section['notes'] = ''.join(
+                process_note_line(note)
+                for note in section['notes']).strip()
 
         # remove empty sections
         version['sections'] = [section for section in version['sections']
