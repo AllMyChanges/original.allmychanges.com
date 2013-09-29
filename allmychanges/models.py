@@ -149,7 +149,8 @@ class Repo(models.Model):
             self.save()
 
             for change in changes:
-                version = self.versions.create(name=change['version'] or 'unrecognized')
+                version = self.versions.create(name=change['version'] or 'unrecognized',
+                                               date=change.get('date'),)
                 for section in change['sections']:
 
                     item = version.items.create(
