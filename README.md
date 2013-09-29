@@ -6,7 +6,7 @@ A project for Django Dash 2013
 How to setup
 ------------
 
-    $ sudo apt-get install mysql-server redis-server python-dev
+    $ sudo apt-get install mysql-server redis-server python-dev libxml2-dev libxslt1-dev
     $ chmod +x scripts/create-env.sh
     $ scripts/create-env.sh
     $ source env/bin/activate
