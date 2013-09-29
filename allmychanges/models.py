@@ -187,3 +187,7 @@ class RepoVersionItemChange(models.Model):
     version_item = models.ForeignKey(RepoVersionItem, related_name='changes')
     type = models.CharField(max_length=10, choices=REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES)
     text = models.TextField()
+
+    @property
+    def text_clean(self):
+        return get_clean_text_from_markup_text(self.text, markup_type=self.version_item.version.repo.changelog_markup)
