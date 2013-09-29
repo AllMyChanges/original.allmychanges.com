@@ -9,6 +9,8 @@ pushd "$BASEDIR" > /dev/null
 git pull
 env/bin/pip install -r requirements.txt
 
+sudo -u www-data env/bin/python manage.py syndb --migrate
+
 sudo cp configs/upstart.conf /etc/init/allmychanges.conf
 sudo service allmychanges restart
 sudo cp configs/nginx.conf /etc/nginx/sites-enabled/allmychanges.conf
