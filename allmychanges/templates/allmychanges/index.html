@@ -113,13 +113,13 @@
              style="width: {{ current_repo.processing_progress }}%;">&nbsp;</div>
         <div class="container">
             <div class="headline">
-                <div class="headline-message headline-message-{{ message.type }}">
-                    {{ message.text }}&nbsp;
+                <div class="headline-message headline-message-{{ message.type }}" >
+                    <span ng-bind="message.text"></span>&nbsp;
                 </div>
 
                 <form ng-submit="create_changelog_for_url(current_repo.url)">
                     <div class="input-group">
-                        <input type="text" value="" placeholder="git repo url" class="form-control" ng-model="current_repo.url">
+                        <input type="text" value="" placeholder="GitHub repo url" class="form-control" ng-model="current_repo.url">
                         <span class="input-group-btn">
                             <input type="submit"
                                    value="Show changelog"
@@ -134,8 +134,8 @@
                     <small ng-repeat="example in examples">
                         <a href="javascript: false"
                            style="border-bottom: 1px dotted"
-                           ng-click="create_changelog_for_url(example.url)">
-                            {{ example.title }}
+                           ng-click="create_changelog_for_url(example.url)"
+                           ng-bind="example.title">
                         </a>
                         <span ng-hide="$last">, </span>
                     </small>.
@@ -152,12 +152,12 @@
 
             <div>
                 <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
-                    "<a href="{{ current_repo.url }}" target="_blank">{{ current_repo.title }}</a>" changelog
+                    "<a href="{{ current_repo.url }}" target="_blank" ng-bind="current_repo.title"></a>" changelog
                 </h6>
                 <div>
                     <div ng-repeat="version in current_repo.versions" class="change_container">
                         <div style="margin-bottom: 1em">
-                            <span style="font-weight: bold; font-size: 1.3em; ">Version {{ version.name }}</span>
+                            <span style="font-weight: bold; font-size: 1.3em; " ng-cloak>Version {{ version.name }}</span>
                             <span ng-show="version.date"
                                   class="note"
                                   style="font-size: 13px;">
