@@ -34,13 +34,22 @@ def git_checkout(path, revision_hash):
         return False
 
 
-def aggregate_git_log(path):
-    """Return versions and commits in standard format"""
+def aggregate_git_log(path, progress_callback=lambda progress: None):
+    """Return versions and commits in standard format.
+    Optional callback called from time to time while worker run though git log.
+    It's argument is float from 0.0 to 1.0"""
     versions = list()
 
     current_version, current_commits = None, list()
 
-    for rev_hash, date, msg in git_log_hash(path):
+    log_data = git_log_hash(path)
+    log_length = len(log_data)
+    progress_step = max(1, log_length / 100)
+    
+    for idx, (rev_hash, date, msg) in enumerate(log_data):
+        if idx % progress_step == 0:
+            progress_callback(float(idx) / log_length)
+            
         current_commits.append(msg)
         if git_checkout(path=path, revision_hash=rev_hash):
             version = get_package_metadata(path=path, field_name='Version')
