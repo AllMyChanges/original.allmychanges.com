@@ -17,6 +17,8 @@ class RepoVersionItemChangeInlines(admin.TabularInline):
 
 
 class RepoAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'requested_count')
+    date_hierarchy = 'date_created'
     inlines = (RepoVersionInlines,)
 
 

@@ -16,6 +16,10 @@ RQ_QUEUES = {
    },
 }
 
+DATABASES['default'].update({
+    'NAME': 'allmychanges',
+})
+
 ALLOWED_HOSTS = ['allmychanges.com']
 
 SHOW_METRIKA = True
