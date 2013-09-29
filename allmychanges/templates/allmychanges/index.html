@@ -10,6 +10,10 @@
 
         $scope.current_repo = {};
         $scope.message = {};
+        $scope.subscribe_message = 'Subscribe to project news';
+        $scope.subscribe_email = null;
+        $scope.subscription_enabled = true;
+        $scope.subscription_finished = false;
 
         $scope.examples = [
             {
@@ -26,12 +30,31 @@
             }
         ];
 
-        $scope.create_message_from_dict = function(dict) {
+        $scope.do_subscribe = function(email) {
+            $scope.subscription_enabled = false;
+            $http({
+                method: 'POST',
+                data: {email: email},
+                url: '/v1/subscriptions/?format=json'
+            }).success(function(data){
+                $scope.subscription_finished = true;
+                $scope.subscribe_message = "Thanks. You've been subscribed!"
+            }).error(function(data){
+                $scope.subscription_enabled = true;
+                $scope.subscribe_message = $scope.create_message_from_dict(data, true);
+            });
+        };
+
+        $scope.create_message_from_dict = function(dict, without_keys) {
             var messages = [];
             $.each(dict, function(key, value){
-                messages.push(key.toUpperCase() + ': ' + value.join(' '))
+                var str = value.join(' ');
+                if (!without_keys) {
+                    str = key.toUpperCase() + ': ' + str;
+                }
+                messages.push(str);
             });
-            return messages.join('; ')
+            return messages.join('; ');
         };
 
         $scope.create_changelog_for_url = function(url) {
@@ -145,9 +168,38 @@
             </div>
 
             <div>
-                <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em;">
-                    "<a href="{{ current_repo.url }}" target="_blank" ng-bind="current_repo.title"></a>" changelog
-                </h6>
+                <div class="clearfix">
+                    <h6 ng-show="current_repo.title" style="margin-bottom: 1.5em; float: left;">
+                        "<a href="{{ current_repo.url }}" target="_blank" ng-bind="current_repo.title"></a>" changelog
+                    </h6>
+                    <div ng-show="current_repo.url=='https://github.com/AllMyChanges/allmychanges.com' && current_repo.processing_state=='finished'"
+                         style="text-align: right; float: right">
+                        <form ng-submit="do_subscribe(subscribe_email)">
+                            <table style="margin-top: 0.4em">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding-right: 1em;">
+                                            <label for="subscribe"
+                                                   style="color: #95A5A6; font-size: 1.3em; margin-top: 0.3em"
+                                                   ng-bind="subscribe_message"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   value=""
+                                                   placeholder="Your email"
+                                                   class="form-control"
+                                                   id="subscribe"
+                                                   style="width: 11em;"
+                                                   ng-model="subscribe_email"
+                                                   ng-disabled="!subscription_enabled"
+                                                   ng-show="!subscription_finished">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
                 <div>
                     <div ng-repeat="version in current_repo.versions" class="change_container">
                         <div style="margin-bottom: 1em">

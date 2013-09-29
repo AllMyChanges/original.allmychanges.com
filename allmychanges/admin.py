@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange
+from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange, Subscription
 
 
 class RepoVersionInlines(admin.TabularInline):
@@ -28,6 +28,11 @@ class RepoVersionItemAdmin(admin.ModelAdmin):
     inlines = (RepoVersionItemChangeInlines,)
 
 
+class SubscriptionAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Repo, RepoAdmin)
 admin.site.register(RepoVersion, RepoVersionAdmin)
 admin.site.register(RepoVersionItem, RepoVersionItemAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)

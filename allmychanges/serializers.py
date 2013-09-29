@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from rest_framework_extensions.fields import ResourceUriField
 
-from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange
+from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange, Subscription
 
 
 class RepoVersionItemChangeSerializer(serializers.ModelSerializer):
@@ -66,3 +66,12 @@ class RepoDetailSerializer(RepoSerializer):
 
 class CreateChangelogSerializer(serializers.Serializer):
     url = serializers.URLField()
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = (
+            'email',
+            'date_created',
+        )

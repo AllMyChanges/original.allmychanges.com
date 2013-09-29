@@ -34,6 +34,8 @@ class Repo(models.Model):
     url = models.URLField(unique=True)
     title = models.CharField(max_length=255)
     changelog_markup = models.CharField(max_length=20, choices=MARKUP_CHOICES, blank=True, null=True)
+    date_created = models.DateTimeField(blank=True, null=True)
+    requested_count = models.PositiveIntegerField(default=0)
 
     # processing fields
     processing_state = models.CharField(max_length=20, choices=PROCESSING_STATE_CHOICES, null=True)
@@ -193,3 +195,11 @@ class RepoVersionItemChange(models.Model):
     version_item = models.ForeignKey(RepoVersionItem, related_name='changes')
     type = models.CharField(max_length=10, choices=REPO_VERSION_ITEM_CHANGE_TYPE_CHOICES)
     text = models.TextField()
+
+
+class Subscription(models.Model):
+    email = models.EmailField()
+    date_created = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.email
