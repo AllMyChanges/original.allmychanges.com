@@ -35,3 +35,7 @@ In production you will need additional steps like:
    $ sudo -u www-data ssh-keygen
    $ cat /var/www/.ssh/id_rsa.pub
    $ echo "Now create a new GitHub account and put this ssh key there."
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AllMyChanges/allmychanges.com/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
