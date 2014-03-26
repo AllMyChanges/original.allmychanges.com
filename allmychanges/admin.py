@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from allmychanges.models import Repo, RepoVersion, RepoVersionItem, RepoVersionItemChange, Subscription
+from allmychanges.models import (
+    Repo, RepoVersion, RepoVersionItem,
+    RepoVersionItemChange, Subscription,
+    BlogPost)
 
 
 class RepoVersionInlines(admin.TabularInline):
@@ -35,7 +38,14 @@ class SubscriptionAdmin(admin.ModelAdmin):
     pass
 
 
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'published_at')
+    search_fields = ('title', 'body')
+    date_hierarchy = 'published_at'
+
+
 admin.site.register(Repo, RepoAdmin)
 admin.site.register(RepoVersion, RepoVersionAdmin)
 admin.site.register(RepoVersionItem, RepoVersionItemAdmin)
 admin.site.register(Subscription, SubscriptionAdmin)
+admin.site.register(BlogPost, BlogPostAdmin)

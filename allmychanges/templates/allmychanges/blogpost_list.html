@@ -1,0 +1,16 @@
+{% extends "allmychanges/base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+  {% for obj in object_list %}
+  <article class="b-blog-post">
+    <h1>{{ obj.title }}</h1>
+    <h2>{{ obj.published_at }}</h2>
+    {{ obj.body_html }}
+  </article>
+  {% endfor %}
+</div>
+
+{% endblock content %}

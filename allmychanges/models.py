@@ -15,6 +15,7 @@ from allmychanges.utils import (
     get_commit_type,
     get_markup_type,
     get_clean_text_from_markup_text,
+    render_markdown,
 )
 from allmychanges.tasks import update_repo
 
@@ -227,3 +228,13 @@ class Subscription(models.Model):
 
     def __unicode__(self):
         return self.email
+
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=255)
+    body  = models.TextField()
+    published_at = models.DateField(blank=True, null=True)
+
+    @property
+    def body_html(self):
+        return render_markdown(self.body)
