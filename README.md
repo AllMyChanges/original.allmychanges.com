@@ -1,6 +1,8 @@
 allmychanges.com
 ================
 
+[![Join the chat at https://gitter.im/AllMyChanges/allmychanges.com](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AllMyChanges/allmychanges.com?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A project for Django Dash 2013
 
 How to setup
