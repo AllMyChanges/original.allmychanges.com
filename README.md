@@ -1,6 +1,8 @@
 allmychanges.com
 ================
 
+[![Join the chat at https://gitter.im/AllMyChanges/allmychanges.com](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AllMyChanges/allmychanges.com?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A project for Django Dash 2013
 
 How to setup
@@ -30,8 +32,8 @@ Maybe you need to create mysql database before `./manage.py syncdb --migrate`. R
 
 In production you will need additional steps like:
 
-   $ sudo mkdir -p /var/www/.ssh
-   $ sudo chown www-data:www-data /var/www/.ssh
-   $ sudo -u www-data ssh-keygen
-   $ cat /var/www/.ssh/id_rsa.pub
-   $ echo "Now create a new GitHub account and put this ssh key there."
+    $ sudo mkdir -p /var/www/.ssh
+    $ sudo chown www-data:www-data /var/www/.ssh
+    $ sudo -u www-data ssh-keygen
+    $ cat /var/www/.ssh/id_rsa.pub
+    $ echo "Now create a new GitHub account and put this ssh key there."
