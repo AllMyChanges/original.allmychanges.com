@@ -27,7 +27,7 @@ How to setup
 
 Maybe you need to create mysql database before `./manage.py syncdb --migrate`. Run `mysql -uroot`:
 
-    mysql> CREATE DATABASE allmychanges CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    mysql> CREATE DATABASE allmychanges CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
     mysql> GRANT ALL ON allmychanges.* TO `allmychanges`@`localhost` IDENTIFIED BY 'allmychanges';
 
 In production you will need additional steps like:
